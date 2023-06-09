@@ -1,11 +1,9 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>My New Hugo Site</title>
-        <link>https://rosouly.github.io/rosy.github.io/</link>
-        <description>This is my cool site</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 08 Jun 2023 22:57:51 &#43;0800</lastBuildDate>
-            <atom:link href="https://rosouly.github.io/rosy.github.io/index.xml" rel="self" type="application/rss+xml" />
-        <item>
+        <title>All Posts - My New Hugo Site</title>
+        <link>https://rosouly.github.io/rosy.github.io/posts/</link>
+        <description>All Posts | My New Hugo Site</description>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 08 Jun 2023 22:57:51 &#43;0800</lastBuildDate><atom:link href="https://rosouly.github.io/rosy.github.io/posts/" rel="self" type="application/rss+xml" /><item>
     <title>如何基于hugo&#43;github page搭建博客</title>
     <link>https://rosouly.github.io/rosy.github.io/posts/my-first-post/</link>
     <pubDate>Thu, 08 Jun 2023 22:57:51 &#43;0800</pubDate>
