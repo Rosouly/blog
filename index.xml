@@ -6,6 +6,26 @@
         <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 08 Jun 2023 22:57:51 &#43;0800</lastBuildDate>
             <atom:link href="https://rosouly.github.io/rosy.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>K8s入门</title>
+    <link>https://rosouly.github.io/rosy.github.io/posts/k8s%E5%85%A5%E9%97%A8/</link>
+    <pubDate>Thu, 08 Jun 2023 22:57:51 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://rosouly.github.io/rosy.github.io/posts/k8s%E5%85%A5%E9%97%A8/</guid>
+    <description><![CDATA[k8s kubernetes基础概念 Node
+Pod
+通常一个Pod有一个应用程序（理论上也可以有多个） 每个Pod都有一个IP地址 每当一个Pod die了就会重新建立一个Pod，IP地址并不沿用之前的，而是重新分配 如果访问数据库是通过ip来访问，当ip发生改变，就要手动更改ip，非常麻烦，因此就有了Service这个概念 Service
+每一个Pod有一个Service，Service不会随着Pod的声明周期发生变化（解决了ip变化的问题） Ingress
+外部网络访问Service的一个接口 config Map
+用于存储配置文件，例如数据库的url secret
+同样用于存储配置信息，但安全性更高，例如存储数据库的用户名密码 volume
+类似于docker的volume用于数据持久化 k8s的voume可以在本地也可以飞本地，例如云服务 Deployment
+为了防止downtime，需要对一个Pod创建副本，Deployment可以控制副本数量 StatefulSet
+Deployment可以创建副本，但是数据库的副本不能由Deployment来创建，因为多个数据库访问同一个volume会有数据不一致的问题，而是要交给StatefulSet来实现 但实际上这仍然很复杂，实践中通常将数据库部署在k8s集群以外 实战 安装minikube 官网：minikube start | minikube (k8s.io)
+环境：windows
+第一个命令的作用：创建目录并下载minikube 第二个命令的作用：将minikube这个目录添加到环境变量中 如果你不想安装到C盘，这里以安装到D:\Program Files (x86)目录下为例：
+New-Item -Path &#39;D:\Program Files (x86)&#39; -Name &#39;minikube&#39; -ItemType Directory -Force Invoke-WebRequest -OutFile &#39;D:\Program Files (x86)\minikube\minikube.exe&#39; -Uri &#39;https://github.com/kubernetes/minikube/releases/latest/download/minikube-windows-amd64.exe&#39; -UseBasicParsing $oldPath = [Environment]::GetEnvironmentVariable(&#39;Path&#39;, [EnvironmentVariableTarget]::Machine) if ($oldPath.Split(&#39;;&#39;) -inotcontains &#39;D:\Program Files (x86)\minikube&#39;){ ` [Environment]::SetEnvironmentVariable(&#39;Path&#39;, $(&#39;{0};D:\Program Files (x86)\minikube&#39; -f $oldPath), [EnvironmentVariableTarget]::Machine) ` } 启动minikube 首先电脑中要有docker，运行下列命令（第一次启动需要等待一段时间，因为要拉取镜像）：]]></description>
+</item>
+<item>
     <title>如何基于hugo&#43;github page搭建博客</title>
     <link>https://rosouly.github.io/rosy.github.io/posts/my-first-post/</link>
     <pubDate>Thu, 08 Jun 2023 22:57:51 &#43;0800</pubDate>
