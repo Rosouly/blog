@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>阅读prompt——拆解操作系统 - My New Hugo Site</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="阅读prompt——拆解操作系统" />
-<meta property="og:description" content="内存管理 为什么要有虚拟内存 总结 第一段总结:介绍了虚拟内存的主要作用和内存分段。
+<meta property="og:description" content="为什么要有虚拟内存 流程图 总结 第一段总结:介绍了虚拟内存的主要作用和内存分段。
 第二段总结:解释了内存分段为什么容易产生内存碎片以及内存交换效率低的原因。
 第三段总结:
 前两段总结:介绍了虚拟内存和内存分段。 本段总结: 介绍了内存分页如何解决分段产生的内存碎片和低效率问题。 第四段总结:
@@ -30,7 +30,7 @@ Linux虚拟地址空间分为:内核空间和用户空间。 用户空间分为:
 <meta property="article:modified_time" content="2023-06-10T14:31:42+08:00" /><meta property="og:site_name" content="My cool site" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="阅读prompt——拆解操作系统"/>
-<meta name="twitter:description" content="内存管理 为什么要有虚拟内存 总结 第一段总结:介绍了虚拟内存的主要作用和内存分段。
+<meta name="twitter:description" content="为什么要有虚拟内存 流程图 总结 第一段总结:介绍了虚拟内存的主要作用和内存分段。
 第二段总结:解释了内存分段为什么容易产生内存碎片以及内存交换效率低的原因。
 第三段总结:
 前两段总结:介绍了虚拟内存和内存分段。 本段总结: 介绍了内存分页如何解决分段产生的内存碎片和低效率问题。 第四段总结:
@@ -80,7 +80,7 @@ Linux虚拟地址空间分为:内核空间和用户空间。 用户空间分为:
             <a href="/rosy.github.io/" title="My New Hugo Site">My cool site</a>
         </div>
         <div class="menu">
-            <div class="menu-inner"><a class="menu-item" href="/rosy.github.io/posts/"> Post </a><a class="menu-item" href="/rosy.github.io/about/"> About </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+            <div class="menu-inner"><a class="menu-item" href="/rosy.github.io/post/"> Post </a><a class="menu-item" href="/rosy.github.io/about/"> About </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
                     <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
                 </a></div>
         </div>
@@ -95,7 +95,7 @@ Linux虚拟地址空间分为:内核空间和用户空间。 用户空间分为:
                 <span></span><span></span><span></span>
             </div>
         </div>
-        <div class="menu" id="menu-mobile"><a class="menu-item" href="/rosy.github.io/posts/" title="">Post</a><a class="menu-item" href="/rosy.github.io/about/" title="">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/rosy.github.io/post/" title="">Post</a><a class="menu-item" href="/rosy.github.io/about/" title="">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
                 <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
             </a></div>
     </div>
@@ -116,6 +116,7 @@ Linux虚拟地址空间分为:内核空间和用户空间。 用户空间分为:
   <ul>
     <li><a href="#为什么要有虚拟内存">为什么要有虚拟内存</a>
       <ul>
+        <li><a href="#流程图">流程图</a></li>
         <li><a href="#总结">总结</a></li>
         <li><a href="#问答">问答</a></li>
       </ul>
@@ -139,8 +140,16 @@ Linux虚拟地址空间分为:内核空间和用户空间。 用户空间分为:
     </li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h1 id="内存管理">内存管理</h1>
-<h2 id="为什么要有虚拟内存">为什么要有虚拟内存</h2>
+            </div><div class="content" id="content"><h2 id="为什么要有虚拟内存">为什么要有虚拟内存</h2>
+<h3 id="流程图">流程图</h3>
+<p><img
+        class="lazyload"
+        src="/rosy.github.io/svg/loading.min.svg"
+        data-src="/rosy.github.io/images/image.png"
+        data-srcset="/rosy.github.io/images/image.png, /rosy.github.io/images/image.png 1.5x, /rosy.github.io/images/image.png 2x"
+        data-sizes="auto"
+        alt="/rosy.github.io/images/image.png"
+        title="/rosy.github.io/images/image.png" /></p>
 <h3 id="总结">总结</h3>
 <p>第一段总结:介绍了虚拟内存的主要作用和内存分段。</p>
 <p>第二段总结:解释了内存分段为什么容易产生内存碎片以及内存交换效率低的原因。</p>

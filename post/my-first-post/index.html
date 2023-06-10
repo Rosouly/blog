@@ -9,7 +9,7 @@
 2. 创建新的 Hugo 站点 打开命令行工具，然后输入以下命令创建一个新的 Hugo 站点：
 hugo new site my-blog 这将在当前目录下创建一个名为 &ldquo;my-blog&rdquo; 的文件夹，其中包含 Hugo 站点的所有文件和目录。
 3. 选择一个主题 浏览 Hugo 主题库，选择一个合适的主题。这里以本博客的主题为例： &ldquo;Loveit&rdquo; ，将其添加到你的站点中：
-cd my-blog git init git submodule add https://github.com/dillonzq/LoveIt.git themes/example-theme 将主题添加到站点配置文件 config.toml 中：
+cd my-blog git init git submodule add https://github.com/dillonzq/LoveIt.git themes/LoveIt 将主题添加到站点配置文件 config.toml 中：
 theme = &#34;example-theme&#34; 4. 创建内容 使用以下命令创建一篇新的博客文章：
 hugo new posts/my-first-post.md 这将在 content/posts 目录下创建一个名为 &ldquo;my-first-post.md&rdquo; 的 Markdown 文件。编辑该文件，添加您的博客内容。
 5. 预览博客 在本地预览您的博客，输入以下命令：
@@ -25,7 +25,7 @@ hugo server 这将启动一个本地服务器，访问 http://localhost:1313 可
 2. 创建新的 Hugo 站点 打开命令行工具，然后输入以下命令创建一个新的 Hugo 站点：
 hugo new site my-blog 这将在当前目录下创建一个名为 &ldquo;my-blog&rdquo; 的文件夹，其中包含 Hugo 站点的所有文件和目录。
 3. 选择一个主题 浏览 Hugo 主题库，选择一个合适的主题。这里以本博客的主题为例： &ldquo;Loveit&rdquo; ，将其添加到你的站点中：
-cd my-blog git init git submodule add https://github.com/dillonzq/LoveIt.git themes/example-theme 将主题添加到站点配置文件 config.toml 中：
+cd my-blog git init git submodule add https://github.com/dillonzq/LoveIt.git themes/LoveIt 将主题添加到站点配置文件 config.toml 中：
 theme = &#34;example-theme&#34; 4. 创建内容 使用以下命令创建一篇新的博客文章：
 hugo new posts/my-first-post.md 这将在 content/posts 目录下创建一个名为 &ldquo;my-first-post.md&rdquo; 的 Markdown 文件。编辑该文件，添加您的博客内容。
 5. 预览博客 在本地预览您的博客，输入以下命令：
@@ -34,7 +34,7 @@ hugo server 这将启动一个本地服务器，访问 http://localhost:1313 可
 <meta name="application-name" content="My cool site">
 <meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://rosouly.github.io/rosy.github.io/post/my-first-post/" /><link rel="next" href="https://rosouly.github.io/rosy.github.io/post/k8s%E5%85%A5%E9%97%A8/" /><link rel="stylesheet" href="/rosy.github.io/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://rosouly.github.io/rosy.github.io/post/my-first-post/" /><link rel="prev" href="https://rosouly.github.io/rosy.github.io/post/%E9%98%85%E8%AF%BBprompt/" /><link rel="next" href="https://rosouly.github.io/rosy.github.io/post/k8s%E5%85%A5%E9%97%A8/" /><link rel="stylesheet" href="/rosy.github.io/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
     {
@@ -93,7 +93,7 @@ hugo server 这将启动一个本地服务器，访问 http://localhost:1313 可
 <p>浏览 Hugo 主题库，选择一个合适的主题。这里以本博客的主题为例： &ldquo;Loveit&rdquo; ，将其添加到你的站点中：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cd my-blog
 </span></span><span style="display:flex;"><span>git init
-</span></span><span style="display:flex;"><span>git submodule add https://github.com/dillonzq/LoveIt.git themes/example-theme
+</span></span><span style="display:flex;"><span>git submodule add https://github.com/dillonzq/LoveIt.git themes/LoveIt
 </span></span></code></pre></div><p>将主题添加到站点配置文件 config.toml 中：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span><span style="color:#a6e22e">theme</span> = <span style="color:#e6db74">&#34;example-theme&#34;</span>
 </span></span></code></pre></div><h3 id="4-创建内容">4. 创建内容</h3>

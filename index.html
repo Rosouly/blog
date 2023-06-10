@@ -54,7 +54,88 @@
     </div>
 </header><main class="main">
                 <div class="container"><div class="page home" data-home="posts"><div class="home-profile"><div class="home-subtitle"><div id="id-1" class="typeit"></div></div><div class="links"></div></div>
-</div></div>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/rosy.github.io/posts/%E9%98%85%E8%AF%BBprompt-%E6%8B%86%E8%A7%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">阅读prompt——拆解操作系统</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/rosy.github.io/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-06-10">2023-06-10</time></span></div><div class="content">为什么要有虚拟内存 流程图 总结 第一段总结:介绍了虚拟内存的主要作用和内存分段。
+第二段总结:解释了内存分段为什么容易产生内存碎片以及内存交换效率低的原因。
+第三段总结:
+前两段总结:介绍了虚拟内存和内存分段。 本段总结: 介绍了内存分页如何解决分段产生的内存碎片和低效率问题。 第四段总结:
+前三段总结:介绍了虚拟内存、内存分段和内存分页。 本段总结:解释了简单分页机制产生的页表占用空间问题。 第五段总结:
+前四段总结:介绍了虚拟内存、内存分段、内存分页和简单分页机制。 本段总结:介绍多级分页来解决页表占用空间问题。 第六段总结:
+前五段总结:解释了虚拟内存、内存分段、分页、多级页表。 本段总结:介绍了 TLB 来提高地址转换效率。 第七段总结:
+前六段总结:讲解了多级分页页表和 TLB。 本段总结: 说明了Linux主要采用分页管理虽然也涉及到分段管理。 第八段总结:
+前七段总结:介绍了Linux主要采用分页管理。 本段总结:说明了Linux虚拟地址空间的布局。 第九段总结:
+前八段总结:解释了 Linux 内存管理方式及其虚拟地址空间布局。 本段总结:总结介绍了虚拟内存的主要作用。 问答 问题1:虚拟内存的主要作用是什么?
+主要有两点作用: 可以使程序运行的内存大小超过实际物理内存。通过内存换出和换入,不常用的内存页写到硬盘,需要时再读回。 为每个进程提供独立的虚拟地址空间,解决了不同进程地址冲突的问题。每个进程看到的都是同样的虚拟地址,实际物理地址 通过页表映射而不同。 问题2:介绍一下内存分段?
+内存分段是按照程序逻辑把内存划分为代码段、数据段、栈段等段。每个段有不同的属性。 虚拟地址是由段选择符和段内偏移量组成。段选择符索引到段表获取段的基地址,然后结合段内偏移量计算出物理地址。 分段能产生连续地址空间,但会产生外部内存碎片,影响内存交换效率。 问题3:介绍一下内存分页?
+内存分页是将虚拟地址空间和物理内存均划分为大小固定(如4KB)的页。 虚拟地址由页号和页内偏移组成。页号索引到页表得到物理页地址,与页内偏移相加得到物理地址。 分页减少了内存碎片,并提高了内存交换效率。 问题4:介绍一下多级页表?
+为解决简单分页导致的页表太大问题,采用多级页表。 比如将一级页表分成多个二级页表,二级页表上的页表项数减少。仅在需要时创建下级页表。 这样使用时分布在各级页表上的页表项数显著减少,节省了大量内存。 问题5:介绍一下TLB?
+TLB即转换查询缓存。位于CPU和MMU之间。 可以缓存最近访问过的虚拟地址和物理地址的映射。 为解决多级页表导致的地址转换时间长的问题。 TLB的命中率高,能大大提高地址转换效率。 问题6:介绍一下Linux的内存管理方式?
+Linux主要采用的是分页式内存管理。 但是由于x86处理器支持分段式和分页式内存管理,Linux不得不采用段式内存管理。 但是Linux会把所有的段基地址设为0,相当于屏蔽了分段,段只用于访问控制和保护。 问题7:介绍一下Linux虚拟地址空间的布局?
+Linux虚拟地址空间分为:内核空间和用户空间。 用户空间分为:代码段、数据段、BSS段、堆区、文件映射区、栈区。 malloc是如何分配内存的？ 总结 一段文本的总结如下:
+第一段总结: malloc 分配内存的两种方式及大小阈值。
+第二段总结: Linux进程的内存空间分布情况。</div><div class="post-footer">
+        <a href="/rosy.github.io/posts/%E9%98%85%E8%AF%BBprompt-%E6%8B%86%E8%A7%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">Read More</a></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/rosy.github.io/posts/%E4%B8%BAhugo%E6%B7%BB%E5%8A%A0%E6%A0%B7%E5%BC%8F/">解决LoveIt代码块超出屏幕范围的问题</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/rosy.github.io/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-06-09">2023-06-09</time></span></div><div class="content">在themes\Lovelt\assets\css\style.scss底部添加下列代码
+pre { overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; max-width: 100%; } </div><div class="post-footer">
+        <a href="/rosy.github.io/posts/%E4%B8%BAhugo%E6%B7%BB%E5%8A%A0%E6%A0%B7%E5%BC%8F/">Read More</a></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/rosy.github.io/posts/k8s%E5%85%A5%E9%97%A8/">K8s入门</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/rosy.github.io/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-06-08">2023-06-08</time></span></div><div class="content">kubernetes基础概念 Node
+Pod 通常一个Pod有一个应用程序（理论上也可以有多个） 每个Pod都有一个IP地址 每当一个Pod die了就会重新建立一个Pod，IP地址并不沿用之前的，而是重新分配 如果访问数据库是通过ip来访问，当ip发生改变，就要手动更改ip，非常麻烦，因此就有了Service这个概念 Service 每一个Pod有一个Service，Service不会随着Pod的声明周期发生变化（解决了ip变化的问题） Ingress 外部网络访问Service的一个接口 config Map 用于存储配置文件，例如数据库的url secret 同样用于存储配置信息，但安全性更高，例如存储数据库的用户名密码 volume 类似于docker的volume用于数据持久化 k8s的voume可以在本地也可以飞本地，例如云服务 Deployment 为了防止downtime，需要对一个Pod创建副本，Deployment可以控制副本数量 StatefulSet Deployment可以创建副本，但是数据库的副本不能由Deployment来创建，因为多个数据库访问同一个volume会有数据不一致的问题，而是要交给StatefulSet来实现 但实际上这仍然很复杂，实践中通常将数据库部署在k8s集群以外 实战 安装minikube 官网：minikube start | minikube (k8s.io)
+操作系统：windows
+第一个命令的作用：创建目录并下载minikube 第二个命令的作用：将minikube这个目录添加到环境变量中 如果你不想安装到C盘，这里以安装到D:\Program Files (x86)目录下为例：
+New-Item -Path &#39;D:\Program Files (x86)&#39; -Name &#39;minikube&#39; -ItemType Directory -Force Invoke-WebRequest -OutFile &#39;D:\Program Files (x86)\minikube\minikube.exe&#39; -Uri &#39;https://github.com/kubernetes/minikube/releases/latest/download/minikube-windows-amd64.exe&#39; -UseBasicParsing $oldPath = [Environment]::GetEnvironmentVariable(&#39;Path&#39;, [EnvironmentVariableTarget]::Machine) if ($oldPath.Split(&#39;;&#39;) -inotcontains &#39;D:\Program Files (x86)\minikube&#39;){ ` [Environment]::SetEnvironmentVariable(&#39;Path&#39;, $(&#39;{0};D:\Program Files (x86)\minikube&#39; -f $oldPath), [EnvironmentVariableTarget]::Machine) ` } 启动minikube 首先电脑中要有docker，运行下列命令（第一次启动需要等待一段时间，因为要拉取镜像）：</div><div class="post-footer">
+        <a href="/rosy.github.io/posts/k8s%E5%85%A5%E9%97%A8/">Read More</a></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/rosy.github.io/posts/my-first-post/">基于hugo+github page搭建博客</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/rosy.github.io/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-06-08">2023-06-08</time></span></div><div class="content">本地运行 1. 安装 Hugo 首先，从 Hugo 官网 下载并安装适用于您操作系统的 Hugo。
+2. 创建新的 Hugo 站点 打开命令行工具，然后输入以下命令创建一个新的 Hugo 站点：
+hugo new site my-blog 这将在当前目录下创建一个名为 &ldquo;my-blog&rdquo; 的文件夹，其中包含 Hugo 站点的所有文件和目录。
+3. 选择一个主题 浏览 Hugo 主题库，选择一个合适的主题。这里以本博客的主题为例： &ldquo;Loveit&rdquo; ，将其添加到你的站点中：
+cd my-blog git init git submodule add https://github.com/dillonzq/LoveIt.git themes/LoveIt 将主题添加到站点配置文件 config.toml 中：
+theme = &#34;example-theme&#34; 4. 创建内容 使用以下命令创建一篇新的博客文章：
+hugo new posts/my-first-post.md 这将在 content/posts 目录下创建一个名为 &ldquo;my-first-post.md&rdquo; 的 Markdown 文件。编辑该文件，添加您的博客内容。
+5. 预览博客 在本地预览您的博客，输入以下命令：
+hugo server 这将启动一个本地服务器，访问 http://localhost:1313 可以预览您的博客。
+部署到 GitHub Pages 1.</div><div class="post-footer">
+        <a href="/rosy.github.io/posts/my-first-post/">Read More</a></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/rosy.github.io/posts/%E9%98%85%E8%AF%BBprompt/">阅读prompt</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/rosy.github.io/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-06-08">2023-06-08</time></span></div><div class="content">first prompt（总结） 你是善于总结和提取关键信息的助手。
+我会给你一段文本，请你按照下列要求总结文本，最后再给出阅读建议：
+总结第一段 总结第二段 总结前面两段，并总结第三段 总结前面三段，并总结第四段 &hellip;&hellip; 总结前面n-1段，并总结第n段，直到总结完全文。 所有的总结都在一句话之内完成。 回答的格式为：
+第一段总结：
+第二段总结：
+第三段总结：
+前两段总结： 本段总结： 第四段总结：
+前三段总结： 本段总结 &hellip;&hellip;
+第n段总结
+前n-1段总结： 本段总结： 文本：
+结果 总结如下:
+第一段总结:介绍了虚拟内存的主要作用和内存分段。
+第二段总结:解释了内存分段为什么容易产生内存碎片以及内存交换效率低的原因。
+第三段总结:
+前两段总结:介绍了虚拟内存和内存分段。 本段总结: 介绍了内存分页如何解决分段产生的内存碎片和低效率问题。 第四段总结:
+前三段总结:介绍了虚拟内存、内存分段和内存分页。 本段总结:解释了简单分页机制产生的页表占用空间问题。 第五段总结:
+前四段总结:介绍了虚拟内存、内存分段、内存分页和简单分页机制。 本段总结:介绍多级分页来解决页表占用空间问题。 第六段总结:
+前五段总结:解释了虚拟内存、内存分段、分页、多级页表。 本段总结:介绍了 TLB 来提高地址转换效率。 第七段总结:
+前六段总结:讲解了多级分页页表和 TLB。 本段总结: 说明了Linux主要采用分页管理虽然也涉及到分段管理。 第八段总结:
+前七段总结:介绍了Linux主要采用分页管理。 本段总结:说明了Linux虚拟地址空间的布局。 第九段总结:
+前八段总结:解释了 Linux 内存管理方式及其虚拟地址空间布局。 本段总结:总结介绍了虚拟内存的主要作用。 second prompt 2（回答问题） 你是计算机行业的求职者，你的任务是回答面试官给你的问题，得到面试官的青睐
+你的问题必须基于我的文本来回答。
+问题1：虚拟内存的主要作用是什么？
+问题2：介绍一下内存分段？
+问题3：介绍一下内存分页？
+问题4：介绍一下多级页表？
+问题5：介绍一下TLB？
+问题6：介绍一下Linux的内存管理方式？
+问题7：介绍一下Linux虚拟地址空间的布局？
+文本：</div><div class="post-footer">
+        <a href="/rosy.github.io/posts/%E9%98%85%E8%AF%BBprompt/">Read More</a></div>
+</article></div></div>
             </main><footer class="footer">
         <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.111.3">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
                 </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/rosy.github.io/" target="_blank"></a></span></div>
