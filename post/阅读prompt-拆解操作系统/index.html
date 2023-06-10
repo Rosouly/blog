@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>阅读prompt——拆解操作系统 - My New Hugo Site</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="阅读prompt——拆解操作系统" />
+<meta property="og:description" content="内存管理 为什么要有虚拟内存 流程图 总结 第一段总结:介绍了虚拟内存的主要作用和内存分段。
+第二段总结:解释了内存分段为什么容易产生内存碎片以及内存交换效率低的原因。
+第三段总结:
+前两段总结:介绍了虚拟内存和内存分段。 本段总结: 介绍了内存分页如何解决分段产生的内存碎片和低效率问题。 第四段总结:
+前三段总结:介绍了虚拟内存、内存分段和内存分页。 本段总结:解释了简单分页机制产生的页表占用空间问题。 第五段总结:
+前四段总结:介绍了虚拟内存、内存分段、内存分页和简单分页机制。 本段总结:介绍多级分页来解决页表占用空间问题。 第六段总结:
+前五段总结:解释了虚拟内存、内存分段、分页、多级页表。 本段总结:介绍了 TLB 来提高地址转换效率。 第七段总结:
+前六段总结:讲解了多级分页页表和 TLB。 本段总结: 说明了Linux主要采用分页管理虽然也涉及到分段管理。 第八段总结:
+前七段总结:介绍了Linux主要采用分页管理。 本段总结:说明了Linux虚拟地址空间的布局。 第九段总结:
+前八段总结:解释了 Linux 内存管理方式及其虚拟地址空间布局。 本段总结:总结介绍了虚拟内存的主要作用。 问答 问题1:虚拟内存的主要作用是什么?
+主要有两点作用: 可以使程序运行的内存大小超过实际物理内存。通过内存换出和换入,不常用的内存页写到硬盘,需要时再读回。 为每个进程提供独立的虚拟地址空间,解决了不同进程地址冲突的问题。每个进程看到的都是同样的虚拟地址,实际物理地址 通过页表映射而不同。 问题2:介绍一下内存分段?
+内存分段是按照程序逻辑把内存划分为代码段、数据段、栈段等段。每个段有不同的属性。 虚拟地址是由段选择符和段内偏移量组成。段选择符索引到段表获取段的基地址,然后结合段内偏移量计算出物理地址。 分段能产生连续地址空间,但会产生外部内存碎片,影响内存交换效率。 问题3:介绍一下内存分页?
+内存分页是将虚拟地址空间和物理内存均划分为大小固定(如4KB)的页。 虚拟地址由页号和页内偏移组成。页号索引到页表得到物理页地址,与页内偏移相加得到物理地址。 分页减少了内存碎片,并提高了内存交换效率。 问题4:介绍一下多级页表?
+为解决简单分页导致的页表太大问题,采用多级页表。 比如将一级页表分成多个二级页表,二级页表上的页表项数减少。仅在需要时创建下级页表。 这样使用时分布在各级页表上的页表项数显著减少,节省了大量内存。 问题5:介绍一下TLB?
+TLB即转换查询缓存。位于CPU和MMU之间。 可以缓存最近访问过的虚拟地址和物理地址的映射。 为解决多级页表导致的地址转换时间长的问题。 TLB的命中率高,能大大提高地址转换效率。 问题6:介绍一下Linux的内存管理方式?
+Linux主要采用的是分页式内存管理。 但是由于x86处理器支持分段式和分页式内存管理,Linux不得不采用段式内存管理。 但是Linux会把所有的段基地址设为0,相当于屏蔽了分段,段只用于访问控制和保护。 问题7:介绍一下Linux虚拟地址空间的布局?
+Linux虚拟地址空间分为:内核空间和用户空间。 用户空间分为:代码段、数据段、BSS段、堆区、文件映射区、栈区。 malloc是如何分配内存的？ 总结 一段文本的总结如下:
+第一段总结: malloc 分配内存的两种方式及大小阈值。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://rosouly.github.io/rosy.github.io/post/%E9%98%85%E8%AF%BBprompt-%E6%8B%86%E8%A7%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-06-10T14:31:42+08:00" />
+<meta property="article:modified_time" content="2023-06-10T14:31:42+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="阅读prompt——拆解操作系统"/>
+<meta name="twitter:description" content="内存管理 为什么要有虚拟内存 流程图 总结 第一段总结:介绍了虚拟内存的主要作用和内存分段。
+第二段总结:解释了内存分段为什么容易产生内存碎片以及内存交换效率低的原因。
+第三段总结:
+前两段总结:介绍了虚拟内存和内存分段。 本段总结: 介绍了内存分页如何解决分段产生的内存碎片和低效率问题。 第四段总结:
+前三段总结:介绍了虚拟内存、内存分段和内存分页。 本段总结:解释了简单分页机制产生的页表占用空间问题。 第五段总结:
+前四段总结:介绍了虚拟内存、内存分段、内存分页和简单分页机制。 本段总结:介绍多级分页来解决页表占用空间问题。 第六段总结:
+前五段总结:解释了虚拟内存、内存分段、分页、多级页表。 本段总结:介绍了 TLB 来提高地址转换效率。 第七段总结:
+前六段总结:讲解了多级分页页表和 TLB。 本段总结: 说明了Linux主要采用分页管理虽然也涉及到分段管理。 第八段总结:
+前七段总结:介绍了Linux主要采用分页管理。 本段总结:说明了Linux虚拟地址空间的布局。 第九段总结:
+前八段总结:解释了 Linux 内存管理方式及其虚拟地址空间布局。 本段总结:总结介绍了虚拟内存的主要作用。 问答 问题1:虚拟内存的主要作用是什么?
+主要有两点作用: 可以使程序运行的内存大小超过实际物理内存。通过内存换出和换入,不常用的内存页写到硬盘,需要时再读回。 为每个进程提供独立的虚拟地址空间,解决了不同进程地址冲突的问题。每个进程看到的都是同样的虚拟地址,实际物理地址 通过页表映射而不同。 问题2:介绍一下内存分段?
+内存分段是按照程序逻辑把内存划分为代码段、数据段、栈段等段。每个段有不同的属性。 虚拟地址是由段选择符和段内偏移量组成。段选择符索引到段表获取段的基地址,然后结合段内偏移量计算出物理地址。 分段能产生连续地址空间,但会产生外部内存碎片,影响内存交换效率。 问题3:介绍一下内存分页?
+内存分页是将虚拟地址空间和物理内存均划分为大小固定(如4KB)的页。 虚拟地址由页号和页内偏移组成。页号索引到页表得到物理页地址,与页内偏移相加得到物理地址。 分页减少了内存碎片,并提高了内存交换效率。 问题4:介绍一下多级页表?
+为解决简单分页导致的页表太大问题,采用多级页表。 比如将一级页表分成多个二级页表,二级页表上的页表项数减少。仅在需要时创建下级页表。 这样使用时分布在各级页表上的页表项数显著减少,节省了大量内存。 问题5:介绍一下TLB?
+TLB即转换查询缓存。位于CPU和MMU之间。 可以缓存最近访问过的虚拟地址和物理地址的映射。 为解决多级页表导致的地址转换时间长的问题。 TLB的命中率高,能大大提高地址转换效率。 问题6:介绍一下Linux的内存管理方式?
+Linux主要采用的是分页式内存管理。 但是由于x86处理器支持分段式和分页式内存管理,Linux不得不采用段式内存管理。 但是Linux会把所有的段基地址设为0,相当于屏蔽了分段,段只用于访问控制和保护。 问题7:介绍一下Linux虚拟地址空间的布局?
+Linux虚拟地址空间分为:内核空间和用户空间。 用户空间分为:代码段、数据段、BSS段、堆区、文件映射区、栈区。 malloc是如何分配内存的？ 总结 一段文本的总结如下:
+第一段总结: malloc 分配内存的两种方式及大小阈值。"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://rosouly.github.io/rosy.github.io/post/%E9%98%85%E8%AF%BBprompt-%E6%8B%86%E8%A7%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" /><link rel="prev" href="https://rosouly.github.io/rosy.github.io/post/%E4%B8%BAhugo%E6%B7%BB%E5%8A%A0%E6%A0%B7%E5%BC%8F/" /><link rel="stylesheet" href="/rosy.github.io/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "阅读prompt——拆解操作系统",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/rosouly.github.io\/rosy.github.io\/post\/%E9%98%85%E8%AF%BBprompt-%E6%8B%86%E8%A7%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F\/"
+        },"genre": "post","wordcount":  194 ,
+        "url": "https:\/\/rosouly.github.io\/rosy.github.io\/post\/%E9%98%85%E8%AF%BBprompt-%E6%8B%86%E8%A7%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F\/","datePublished": "2023-06-10T14:31:42+08:00","dateModified": "2023-06-10T14:31:42+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Author"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/rosy.github.io/" title="My New Hugo Site">My cool site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/rosy.github.io/post/"> Post </a><a class="menu-item" href="/rosy.github.io/about/"> About </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/rosy.github.io/" title="My New Hugo Site">My cool site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/rosy.github.io/post/" title="">Post</a><a class="menu-item" href="/rosy.github.io/about/" title="">About</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="page single special"><h1 class="single-title animate__animated animate__pulse animate__faster">阅读prompt——拆解操作系统</h1><div class="content" id="content"><h1 id="内存管理">内存管理</h1>
+<h2 id="为什么要有虚拟内存">为什么要有虚拟内存</h2>
+<h3 id="流程图">流程图</h3>
+<p><img
+        class="lazyload"
+        src="/rosy.github.io/svg/loading.min.svg"
+        data-src="/rosy.github.io/images/image.png"
+        data-srcset="/rosy.github.io/images/image.png, /rosy.github.io/images/image.png 1.5x, /rosy.github.io/images/image.png 2x"
+        data-sizes="auto"
+        alt="/rosy.github.io/images/image.png"
+        title="/rosy.github.io/images/image.png" /></p>
+<h3 id="总结">总结</h3>
+<p>第一段总结:介绍了虚拟内存的主要作用和内存分段。</p>
+<p>第二段总结:解释了内存分段为什么容易产生内存碎片以及内存交换效率低的原因。</p>
+<p>第三段总结:</p>
+<ul>
+<li>前两段总结:介绍了虚拟内存和内存分段。</li>
+<li>本段总结: 介绍了内存分页如何解决分段产生的内存碎片和低效率问题。</li>
+</ul>
+<p>第四段总结:</p>
+<ul>
+<li>前三段总结:介绍了虚拟内存、内存分段和内存分页。</li>
+<li>本段总结:解释了简单分页机制产生的页表占用空间问题。</li>
+</ul>
+<p>第五段总结:</p>
+<ul>
+<li>前四段总结:介绍了虚拟内存、内存分段、内存分页和简单分页机制。</li>
+<li>本段总结:介绍多级分页来解决页表占用空间问题。</li>
+</ul>
+<p>第六段总结:</p>
+<ul>
+<li>前五段总结:解释了虚拟内存、内存分段、分页、多级页表。</li>
+<li>本段总结:介绍了 TLB 来提高地址转换效率。</li>
+</ul>
+<p>第七段总结:</p>
+<ul>
+<li>前六段总结:讲解了多级分页页表和 TLB。</li>
+<li>本段总结: 说明了Linux主要采用分页管理虽然也涉及到分段管理。</li>
+</ul>
+<p>第八段总结:</p>
+<ul>
+<li>前七段总结:介绍了Linux主要采用分页管理。</li>
+<li>本段总结:说明了Linux虚拟地址空间的布局。</li>
+</ul>
+<p>第九段总结:</p>
+<ul>
+<li>前八段总结:解释了 Linux 内存管理方式及其虚拟地址空间布局。</li>
+<li>本段总结:总结介绍了虚拟内存的主要作用。</li>
+</ul>
+<h3 id="问答">问答</h3>
+<p>问题1:虚拟内存的主要作用是什么?</p>
+<pre><code>主要有两点作用:
+
+可以使程序运行的内存大小超过实际物理内存。通过内存换出和换入,不常用的内存页写到硬盘,需要时再读回。
+
+为每个进程提供独立的虚拟地址空间,解决了不同进程地址冲突的问题。每个进程看到的都是同样的虚拟地址,实际物理地址 通过页表映射而不同。
+</code></pre>
+<p>问题2:介绍一下内存分段?</p>
+<pre><code>内存分段是按照程序逻辑把内存划分为代码段、数据段、栈段等段。每个段有不同的属性。
+虚拟地址是由段选择符和段内偏移量组成。段选择符索引到段表获取段的基地址,然后结合段内偏移量计算出物理地址。
+分段能产生连续地址空间,但会产生外部内存碎片,影响内存交换效率。
+</code></pre>
+<p>问题3:介绍一下内存分页?</p>
+<pre><code>内存分页是将虚拟地址空间和物理内存均划分为大小固定(如4KB)的页。
+虚拟地址由页号和页内偏移组成。页号索引到页表得到物理页地址,与页内偏移相加得到物理地址。
+分页减少了内存碎片,并提高了内存交换效率。
+</code></pre>
+<p>问题4:介绍一下多级页表?</p>
+<pre><code>为解决简单分页导致的页表太大问题,采用多级页表。
+比如将一级页表分成多个二级页表,二级页表上的页表项数减少。仅在需要时创建下级页表。
+这样使用时分布在各级页表上的页表项数显著减少,节省了大量内存。
+</code></pre>
+<p>问题5:介绍一下TLB?</p>
+<pre><code>TLB即转换查询缓存。位于CPU和MMU之间。
+可以缓存最近访问过的虚拟地址和物理地址的映射。
+为解决多级页表导致的地址转换时间长的问题。
+TLB的命中率高,能大大提高地址转换效率。
+</code></pre>
+<p>问题6:介绍一下Linux的内存管理方式?</p>
+<pre><code>Linux主要采用的是分页式内存管理。
+但是由于x86处理器支持分段式和分页式内存管理,Linux不得不采用段式内存管理。
+但是Linux会把所有的段基地址设为0,相当于屏蔽了分段,段只用于访问控制和保护。
+</code></pre>
+<p>问题7:介绍一下Linux虚拟地址空间的布局?</p>
+<pre><code>Linux虚拟地址空间分为:内核空间和用户空间。
+用户空间分为:代码段、数据段、BSS段、堆区、文件映射区、栈区。
+</code></pre>
+<h2 id="malloc是如何分配内存的">malloc是如何分配内存的？</h2>
+<h3 id="总结-1">总结</h3>
+<p>一段文本的总结如下:</p>
+<p>第一段总结: malloc 分配内存的两种方式及大小阈值。</p>
+<p>第二段总结:  Linux进程的内存空间分布情况。</p>
+<p>第三段总结:</p>
+<ul>
+<li>前两段总结:Linux内存空间分为用户空间和内核空间。</li>
+<li>本段总结: malloc 是如何分配内存的。</li>
+</ul>
+<p>第四段总结:</p>
+<ul>
+<li>前三段总结:malloc 通过brk()或mmap()向操作系统申请内存。</li>
+<li>本段总结:malloc 分配的是虚拟内存而非物理内存。</li>
+</ul>
+<p>第五段总结 :</p>
+<ul>
+<li>前四段总结:malloc 默认少于128KB通过brk()分配,大于128KB通过mmap()分配。</li>
+<li>本段总结:malloc(1)实际预分配132KB。</li>
+</ul>
+<p>第六段总结:</p>
+<ul>
+<li>前五段总结:malloc 采用不同方式分配内存。</li>
+<li>本段总结:free 释放 brk() 分配的内存不归还操作系统。</li>
+</ul>
+<h3 id="问答-1">问答</h3>
+<p>问题1:malloc分配内存的方式是什么?</p>
+<pre><code>答案:malloc有两种分配内存的方式:
+
+通过brk()系统调用从堆空间分配内存
+通过mmap()系统调用在文件映射区域分配内存
+</code></pre>
+<p>问题2:malloc的大小阈值是什么?</p>
+<pre><code>答案:malloc的默认大小阈值是128 KB。小于128KB时使用brk(),大于128KB时使用mmap()。
+</code></pre>
+<p>问题3:Linux进程的内存分布情况是什么?</p>
+<pre><code>答案:Linux进程的内存分布主要有:代码段、数据段、BSS段、堆段、文件映射段和栈段。其中堆段和文件映射段是动态分配的。
+</code></pre>
+<p>问题4:malloc是如何分配内存的?</p>
+<pre><code>答案:详见文本内容,根据请求内存大小,malloc会使用brk()或mmap()向操作系统申请相应大小的内存,然后预分配更大的空间作为内存池使用。
+</code></pre>
+<p>问题5:malloc分配的是虚拟内存还是物理内存?</p>
+<pre><code>答案:malloc分配的是虚拟内存。只有在进程首次访问该虚拟地址时,操作系统才会将其映射到物理内存。
+</code></pre>
+<p>问题6:介绍一下malloc(1)</p>
+<pre><code>答案:malloc(1)会预分配更大的内存空间作为内存池,比如默认会预分配132KB的内存。
+</code></pre>
+<p>问题7:介绍一下free?</p>
+<pre><code>答案:free根据内存地址是通过brk()还是mmap()分配的,归还给操作系统的方式不同。brk()分配的内存不会立即归还,而mmap()分配的会立即归还。
+</code></pre>
+<h2 id="内存满了会发生什么">内存满了，会发生什么？</h2>
+<h3 id="总结-2">总结</h3>
+<p>第一段总结:系统内存紧张时,会进行内存回收工作。</p>
+<p>第二段总结:介绍了内存分配的过程。当内存不足时,会进行内存回收。</p>
+<p>第三段总结:</p>
+<p>前两段总结:系统内存紧张时会进行内存回收。
+本段总结:主要讨论哪些内存可以回收。
+第四段总结:</p>
+<p>前三段总结:系统内存紧张时会进行内存回收。回收的内存包括文件页和匿名页。
+本段总结:回收内存会影响性能。
+第五段总结:</p>
+<p>前四段总结:系统内存紧张时会回收内存影响性能。
+本段总结:介绍如何改善回收内存带来的性能问题。
+第六段总结:</p>
+<p>前五段总结:系统内存紧张时会回收内存影响性能。可以调整参数改善。
+本段总结:如何保护一个进程不被 OOM 杀掉。
+第七段总结:</p>
+<p>前六段总结:系统内存紧张时会回收内存影响性能。可以保护进程不被 OOM 杀掉。
+本段总结:总结全文。</p>
+<h3 id="问答-2">问答</h3>
+<h2 id="在-4gb-物理内存的机器上申请-8g-内存会怎么样">在 4GB 物理内存的机器上，申请 8G 内存会怎么样？</h2>
+<h3 id="总结-3">总结</h3>
+<p>第一段总结: 申请8G内存的情况在32位和64位操作系统下表现不同。32位只能申请3G,所以申请8G会失败;64位理论上可以申请128T,所以申请8G不会有问题。</p>
+<p>第二段总结: 在64位操作系统下,没有Swap分区时候申请超过物理内存的虚拟内存,会因为OOM被杀死。</p>
+<p>第三段总结:</p>
+<p>前两段总结: 32位申请8G会失败,64位申请8G不会有问题。
+本段总结: 有Swap分区后,即使虚拟内存超过物理内存也可以正常运行。Swap会将不常用内存写到磁盘,给需要的进程使用。
+第四段总结:</p>
+<p>前三段总结: 有Swap分区可以正常使用超过物理内存的虚拟内存。
+本段总结: Swap换出的内存包括文件数据和匿名页。
+第五段总结:</p>
+<p>前四段总结: Swap换出匿名页如堆栈数据。
+本段总结:没有Swap,申请超过物理内存的虚拟内存会触发OOM。
+第六段总结:</p>
+<p>前五段总结:没有Swap时候会触发OOM。
+本段总结:有Swap时候,即使虚拟内存超过物理内存也可以正常运行。Swap I/O负载升高。
+第七段总结:</p>
+<p>前六段总结: 有Swap可以使用超过物理内存的虚拟内存。
+本段总结: 但进程使用的虚拟内存不是无限的,仍有上限。
+第八段总结:</p>
+<p>前七段总结: 有Swap 分区的进程使用虚拟内存并非无限。
+本段总结: 总结申请8G内存的不同场景。</p>
+<h4 id="问答-3">问答</h4>
+<p>问题1:详细说明分别在32和64位位系统下。在 4GB 物理内存的机器上,申请 8G 内存会怎么样?</p>
+<pre><code>在32位系统下:
+进程最大只能申请3GB左右的虚拟内存,所以申请8GB内存会直接失败,报Cannot allocate memory错误。
+
+在64位系统下:
+进程最多可以申请128TB的虚拟内存,因此申请8GB的虚拟内存是没有问题的。但内核是否会真正分配物理内存需要看以下两个因素:
+
+是否访问了该虚拟内存:如果没有访问,内核不会分配物理内存。
+是否有Swap分区:如果没有Swap分区,一旦访问了超过物理内存的虚拟内存,进程就会被kill掉。如果有Swap分区,进程可以使用超过物理内存的虚拟内存。
+</code></pre>
+<p>问题2:不同的位数操作系统对于上述问题为什么会有不一样的答案。</p>
+<pre><code>主要是32位和64位系统虚拟地址空间的大小不同:
+
+32位系统进程最大只能使用3GB左右的虚拟地址空间,超出就申请失败
+64位系统进程可以使用接近128TB大小的虚拟地址空间,即使物理内存小,也可以通过Swap来进行内存交换,从而使用超出物理内存大小的虚拟内存
+总的来说,申请虚拟内存主要看操作系统位数,分配物理内存则还要考虑是否访问了该虚拟内存以及是否有Swap分区。
+</code></pre>
+</div></div></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.111.3">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/rosy.github.io/" target="_blank"></a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/rosy.github.io/js/theme.min.js"></script></body>
+</html>
