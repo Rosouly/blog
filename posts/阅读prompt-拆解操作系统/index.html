@@ -61,7 +61,7 @@ Linux虚拟地址空间分为:内核空间和用户空间。 用户空间分为:
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/rosouly.github.io\/rosy.github.io\/posts\/%E9%98%85%E8%AF%BBprompt-%E6%8B%86%E8%A7%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F\/"
-        },"genre": "posts","wordcount":  224 ,
+        },"genre": "posts","wordcount":  225 ,
         "url": "https:\/\/rosouly.github.io\/rosy.github.io\/posts\/%E9%98%85%E8%AF%BBprompt-%E6%8B%86%E8%A7%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F\/","datePublished": "2023-06-10T14:31:42+08:00","dateModified": "2023-06-10T14:31:42+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -103,7 +103,7 @@ Linux虚拟地址空间分为:内核空间和用户空间。 用户空间分为:
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">阅读prompt——拆解操作系统</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/rosy.github.io/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-06-10">2023-06-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;224 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-06-10">2023-06-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;225 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -128,6 +128,7 @@ Linux虚拟地址空间分为:内核空间和用户空间。 用户空间分为:
     </li>
     <li><a href="#内存满了会发生什么">内存满了，会发生什么？</a>
       <ul>
+        <li><a href="#流程图-2">流程图</a></li>
         <li><a href="#总结-2">总结</a></li>
         <li><a href="#问答-2">问答</a></li>
       </ul>
@@ -285,6 +286,15 @@ TLB的命中率高,能大大提高地址转换效率。
 <pre><code>答案:free根据内存地址是通过brk()还是mmap()分配的,归还给操作系统的方式不同。brk()分配的内存不会立即归还,而mmap()分配的会立即归还。
 </code></pre>
 <h2 id="内存满了会发生什么">内存满了，会发生什么？</h2>
+<h3 id="流程图-2">流程图</h3>
+<p><img
+        class="lazyload"
+        src="/rosy.github.io/svg/loading.min.svg"
+        data-src="/rosy.github.io/images/%e5%86%85%e5%ad%98%e6%bb%a1%e4%ba%86%ef%bc%8c%e4%bc%9a%e5%8f%91%e7%94%9f%e4%bb%80%e4%b9%88%ef%bc%9f.png"
+        data-srcset="/rosy.github.io/images/%e5%86%85%e5%ad%98%e6%bb%a1%e4%ba%86%ef%bc%8c%e4%bc%9a%e5%8f%91%e7%94%9f%e4%bb%80%e4%b9%88%ef%bc%9f.png, /rosy.github.io/images/%e5%86%85%e5%ad%98%e6%bb%a1%e4%ba%86%ef%bc%8c%e4%bc%9a%e5%8f%91%e7%94%9f%e4%bb%80%e4%b9%88%ef%bc%9f.png 1.5x, /rosy.github.io/images/%e5%86%85%e5%ad%98%e6%bb%a1%e4%ba%86%ef%bc%8c%e4%bc%9a%e5%8f%91%e7%94%9f%e4%bb%80%e4%b9%88%ef%bc%9f.png 2x"
+        data-sizes="auto"
+        alt="/rosy.github.io/images/内存满了，会发生什么？.png"
+        title="/rosy.github.io/images/内存满了，会发生什么？.png" /></p>
 <h3 id="总结-2">总结</h3>
 <p>第一段总结:系统内存紧张时,会进行内存回收工作。</p>
 <p>第二段总结:介绍了内存分配的过程。当内存不足时,会进行内存回收。</p>
