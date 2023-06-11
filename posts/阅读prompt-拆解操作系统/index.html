@@ -21,9 +21,8 @@
 为解决简单分页导致的页表太大问题,采用多级页表。 比如将一级页表分成多个二级页表,二级页表上的页表项数减少。仅在需要时创建下级页表。 这样使用时分布在各级页表上的页表项数显著减少,节省了大量内存。 问题5:介绍一下TLB?
 TLB即转换查询缓存。位于CPU和MMU之间。 可以缓存最近访问过的虚拟地址和物理地址的映射。 为解决多级页表导致的地址转换时间长的问题。 TLB的命中率高,能大大提高地址转换效率。 问题6:介绍一下Linux的内存管理方式?
 Linux主要采用的是分页式内存管理。 但是由于x86处理器支持分段式和分页式内存管理,Linux不得不采用段式内存管理。 但是Linux会把所有的段基地址设为0,相当于屏蔽了分段,段只用于访问控制和保护。 问题7:介绍一下Linux虚拟地址空间的布局?
-Linux虚拟地址空间分为:内核空间和用户空间。 用户空间分为:代码段、数据段、BSS段、堆区、文件映射区、栈区。 malloc是如何分配内存的？ 总结 一段文本的总结如下:
-第一段总结: malloc 分配内存的两种方式及大小阈值。
-第二段总结: Linux进程的内存空间分布情况。" />
+Linux虚拟地址空间分为:内核空间和用户空间。 用户空间分为:代码段、数据段、BSS段、堆区、文件映射区、栈区。 malloc是如何分配内存的？ 流程图 总结 一段文本的总结如下:
+第一段总结: malloc 分配内存的两种方式及大小阈值。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://rosouly.github.io/rosy.github.io/posts/%E9%98%85%E8%AF%BBprompt-%E6%8B%86%E8%A7%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-06-10T14:31:42+08:00" />
@@ -46,9 +45,8 @@ Linux虚拟地址空间分为:内核空间和用户空间。 用户空间分为:
 为解决简单分页导致的页表太大问题,采用多级页表。 比如将一级页表分成多个二级页表,二级页表上的页表项数减少。仅在需要时创建下级页表。 这样使用时分布在各级页表上的页表项数显著减少,节省了大量内存。 问题5:介绍一下TLB?
 TLB即转换查询缓存。位于CPU和MMU之间。 可以缓存最近访问过的虚拟地址和物理地址的映射。 为解决多级页表导致的地址转换时间长的问题。 TLB的命中率高,能大大提高地址转换效率。 问题6:介绍一下Linux的内存管理方式?
 Linux主要采用的是分页式内存管理。 但是由于x86处理器支持分段式和分页式内存管理,Linux不得不采用段式内存管理。 但是Linux会把所有的段基地址设为0,相当于屏蔽了分段,段只用于访问控制和保护。 问题7:介绍一下Linux虚拟地址空间的布局?
-Linux虚拟地址空间分为:内核空间和用户空间。 用户空间分为:代码段、数据段、BSS段、堆区、文件映射区、栈区。 malloc是如何分配内存的？ 总结 一段文本的总结如下:
-第一段总结: malloc 分配内存的两种方式及大小阈值。
-第二段总结: Linux进程的内存空间分布情况。"/>
+Linux虚拟地址空间分为:内核空间和用户空间。 用户空间分为:代码段、数据段、BSS段、堆区、文件映射区、栈区。 malloc是如何分配内存的？ 流程图 总结 一段文本的总结如下:
+第一段总结: malloc 分配内存的两种方式及大小阈值。"/>
 <meta name="application-name" content="My cool site">
 <meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -63,7 +61,7 @@ Linux虚拟地址空间分为:内核空间和用户空间。 用户空间分为:
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/rosouly.github.io\/rosy.github.io\/posts\/%E9%98%85%E8%AF%BBprompt-%E6%8B%86%E8%A7%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F\/"
-        },"genre": "posts","wordcount":  193 ,
+        },"genre": "posts","wordcount":  224 ,
         "url": "https:\/\/rosouly.github.io\/rosy.github.io\/posts\/%E9%98%85%E8%AF%BBprompt-%E6%8B%86%E8%A7%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F\/","datePublished": "2023-06-10T14:31:42+08:00","dateModified": "2023-06-10T14:31:42+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -105,8 +103,8 @@ Linux虚拟地址空间分为:内核空间和用户空间。 用户空间分为:
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">阅读prompt——拆解操作系统</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/rosy.github.io/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-06-10">2023-06-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;193 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-06-10">2023-06-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;224 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -123,6 +121,7 @@ Linux虚拟地址空间分为:内核空间和用户空间。 用户空间分为:
     </li>
     <li><a href="#malloc是如何分配内存的">malloc是如何分配内存的？</a>
       <ul>
+        <li><a href="#流程图-1">流程图</a></li>
         <li><a href="#总结-1">总结</a></li>
         <li><a href="#问答-1">问答</a></li>
       </ul>
@@ -227,6 +226,15 @@ TLB的命中率高,能大大提高地址转换效率。
 用户空间分为:代码段、数据段、BSS段、堆区、文件映射区、栈区。
 </code></pre>
 <h2 id="malloc是如何分配内存的">malloc是如何分配内存的？</h2>
+<h3 id="流程图-1">流程图</h3>
+<p><img
+        class="lazyload"
+        src="/rosy.github.io/svg/loading.min.svg"
+        data-src="/rosy.github.io/images/malloc%e6%98%af%e5%a6%82%e4%bd%95%e5%88%86%e9%85%8d%e5%86%85%e5%ad%98%e7%9a%84%ef%bc%9f.png"
+        data-srcset="/rosy.github.io/images/malloc%e6%98%af%e5%a6%82%e4%bd%95%e5%88%86%e9%85%8d%e5%86%85%e5%ad%98%e7%9a%84%ef%bc%9f.png, /rosy.github.io/images/malloc%e6%98%af%e5%a6%82%e4%bd%95%e5%88%86%e9%85%8d%e5%86%85%e5%ad%98%e7%9a%84%ef%bc%9f.png 1.5x, /rosy.github.io/images/malloc%e6%98%af%e5%a6%82%e4%bd%95%e5%88%86%e9%85%8d%e5%86%85%e5%ad%98%e7%9a%84%ef%bc%9f.png 2x"
+        data-sizes="auto"
+        alt="/rosy.github.io/images/malloc是如何分配内存的？.png"
+        title="Alt text" /></p>
 <h3 id="总结-1">总结</h3>
 <p>一段文本的总结如下:</p>
 <p>第一段总结: malloc 分配内存的两种方式及大小阈值。</p>
@@ -306,6 +314,26 @@ TLB的命中率高,能大大提高地址转换效率。
 <li>本段总结:总结全文。</li>
 </ul>
 <h3 id="问答-2">问答</h3>
+<p>问题1:什么是后台回收?
+后台回收指的是通过唤醒 kswapd 内核线程来回收内存。这个回收内存的过程是异步的,不会阻塞进程。</p>
+<p>问题2:什么是直接回收?
+直接回收指的是当后台回收跟不上进程内存申请速度时启动的内存回收方式。这种方式是同步回收,会阻塞进程的执行。</p>
+<p>问题3:什么是OOM机制?
+OOM机制即Out Of Memory机制。当系统直接回收内存后内存依然不足时,就会触发OOM机制。会根据算法选择一个进程杀掉,释放内存给其他进程使用。</p>
+<p>问题4:什么时候使用后台回收,什么时候使用直接回收,什么时候会触发OOM机制?
+后台回收会在系统剩余内存(pages_free)低于页低阈值(pages_low)时启动。直接回收会在剩余内存低于页最小阈值(pages_min)时启动。当直接回收后内存依然不足时会触发OOM机制。</p>
+<p>问题5:哪些内存可以被回收?为什么是这些内存可以被回收,其他内存呢?
+可以被回收的内存有两个类型:文件页和匿名页。文件页包括内核缓存的磁盘数据和文件的缓存。匿名页对应堆和栈内存。
+对于其他物理内存地址对应的内容,如硬件映射的内存、内核映射的内存等都是不能回收的。</p>
+<p>问题6:什么是文件页和匿名页的回收倾向?调整文件页和匿名页的回收倾向为什么可以改善性能?
+通过/proc/sys/vm/swappiness这个参数可以调整文件页和匿名页的回收倾向。数值越大越倾向于回收匿名页,数值越小越倾向于回收文件页。
+由于匿名页的Swap会带来磁盘IO,影响性能,而文件页对干净页的直接释放不会有IO,所以优先回收文件页可以改善性能。</p>
+<p>问题7:为什么尽早触发 kswapd 内核线程异步回收内存可以改善性能?
+为避免直接回收同步阻塞进程,尽早触发kswapd进行后台回收可以减少直接回收次数,降低压力。</p>
+<p>问题8:如何尽早触发 kswapd 内核线程异步回收内存?
+可以通过调高/proc/sys/vm/min_free_kbytes参数,使系统预留的空闲内存量变大,从而更早触发kswapd。</p>
+<p>问题9:如何保护一个进程不被 OOM 杀掉?
+我们可以通过调整/proc/[pid]/oom_score_adj为负数值来降低一个进程被OOMKiller杀掉的几率,最低-1000。但是一般不建议直接将值设为-1000,因为可能导致内存泄漏的进程无法被杀死。</p>
 <h2 id="在-4gb-物理内存的机器上申请-8g-内存会怎么样">在 4GB 物理内存的机器上，申请 8G 内存会怎么样？</h2>
 <h3 id="总结-3">总结</h3>
 <p>第一段总结: 申请8G内存的情况在32位和64位操作系统下表现不同。32位只能申请3G,所以申请8G会失败;64位理论上可以申请128T,所以申请8G不会有问题。</p>

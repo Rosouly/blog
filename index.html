@@ -72,9 +72,8 @@
 为解决简单分页导致的页表太大问题,采用多级页表。 比如将一级页表分成多个二级页表,二级页表上的页表项数减少。仅在需要时创建下级页表。 这样使用时分布在各级页表上的页表项数显著减少,节省了大量内存。 问题5:介绍一下TLB?
 TLB即转换查询缓存。位于CPU和MMU之间。 可以缓存最近访问过的虚拟地址和物理地址的映射。 为解决多级页表导致的地址转换时间长的问题。 TLB的命中率高,能大大提高地址转换效率。 问题6:介绍一下Linux的内存管理方式?
 Linux主要采用的是分页式内存管理。 但是由于x86处理器支持分段式和分页式内存管理,Linux不得不采用段式内存管理。 但是Linux会把所有的段基地址设为0,相当于屏蔽了分段,段只用于访问控制和保护。 问题7:介绍一下Linux虚拟地址空间的布局?
-Linux虚拟地址空间分为:内核空间和用户空间。 用户空间分为:代码段、数据段、BSS段、堆区、文件映射区、栈区。 malloc是如何分配内存的？ 总结 一段文本的总结如下:
-第一段总结: malloc 分配内存的两种方式及大小阈值。
-第二段总结: Linux进程的内存空间分布情况。</div><div class="post-footer">
+Linux虚拟地址空间分为:内核空间和用户空间。 用户空间分为:代码段、数据段、BSS段、堆区、文件映射区、栈区。 malloc是如何分配内存的？ 流程图 总结 一段文本的总结如下:
+第一段总结: malloc 分配内存的两种方式及大小阈值。</div><div class="post-footer">
         <a href="/rosy.github.io/posts/%E9%98%85%E8%AF%BBprompt-%E6%8B%86%E8%A7%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">Read More</a></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/rosy.github.io/posts/%E4%B8%BAhugo%E6%B7%BB%E5%8A%A0%E6%A0%B7%E5%BC%8F/">解决LoveIt代码块超出屏幕范围的问题</a>
