@@ -55,7 +55,58 @@
 </header><main class="main">
                 <div class="container"><div class="page home" data-home="posts"><div class="home-profile"><div class="home-subtitle"><div id="id-1" class="typeit"></div></div><div class="links"></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/rosy.github.io/posts/%E9%98%85%E8%AF%BBprompt-%E6%8B%86%E8%A7%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统——内存管理</a>
+        <a href="/rosy.github.io/posts/%E9%98%85%E8%AF%BBprompt_%E7%BD%91%E7%BB%9C%E7%B3%BB%E7%BB%9F/">阅读prompt_网络系统</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/rosy.github.io/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-06-12">2023-06-12</time></span></div><div class="content">什么是零拷贝？ 分段总结 第一段总结:简单介绍什么是零拷贝
+第二段总结:介绍DMA技术的作用
+第三段总结:传统的文件传输存在上下文切换和数据拷贝次数多的问题
+第四段总结:零拷贝技术通过降低上下文切换和数据拷贝次数优化文件传输性能
+第五段总结: 具体分析mmap+write和sendfile两种方法如何实现零拷贝
+第六段总结:介绍PageCache的作用以及对零拷贝的进一步优化
+第七段总结: 针对大文件的传输应该使用异步IO+直接IO代替零拷贝
+前六段总结:概括零拷贝技术 本段总结: 为大文件传输提供了更优方法 第八段总结:
+前七段总结:讲解零拷贝技术和PageCache、直接IO等优化技术 本段总结: 总结零拷贝相关技术原理 I/O 多路复用：select/poll/epoll 分段总结 第一段总结: 最基本的 Socket 模型,描述了通过 Socket 实现 TCP 网络连接的基本过程。
+第二段总结: 如何服务更多的用户?通过多进程模型和多线程模型来支持高并发。
+第三段总结:
+前两段总结:使用多进程/多线程模型来支持高并发。 本段总结:介绍了 I/O 多路复用技术。 第四段总结:
+前三段总结:使用多进程/多线程模型和 I/O 多路复用来实现高并发。 本段总结:介绍了 select/poll 的工作方式。 第五段总结:
+前四段总结:介绍了 select/poll 和多进程多线程模型。 本段总结: 介绍了 epoll 的工作方式。 第六段总结:
+前五段总结:介绍了 select/poll/epoll 的工作方式。 本段总结:总结了 select/poll 和 epoll 的区别。 第一段总结:一致性散列算法解决了分布式系统如何分配请求的问题。
+第二段总结:基于取模算法有问题需要一致性散列算法。
+第三段总结:
+前两段总结:一致性散列算法将节点和数据映射到哈希环上。 本段总结:一致性散列算法查询是顺时针找到第一个节点。 第四段总结:
+前三段总结:一致性散列算法在增加或减少节点时只影响有限的数据。 本段总结:但没有均匀分布引入虚拟节点。 </div><div class="post-footer">
+        <a href="/rosy.github.io/posts/%E9%98%85%E8%AF%BBprompt_%E7%BD%91%E7%BB%9C%E7%B3%BB%E7%BB%9F/">Read More</a></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/rosy.github.io/posts/%E9%98%85%E8%AF%BBprompt_%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">操作系统——文件系统</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/rosy.github.io/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-06-12">2023-06-12</time></span></div><div class="content">进程写文件时，进程发生了崩溃，已写入的数据会丢失吗？ 分段总结 第一段总结:进程写文件时发生了崩溃,已写入的数据不会丢失,因为数据已写入内核的page cache中。
+第二段总结: 页面缓存page cache是 linux文件系统的内存缓存,用于加速读写。
+第三段总结:
+前两段总结: 内核的page cache机制用于加速文件读写。 本段总结:文章介绍了page cache的工作原理。 第四段总结:
+前三段总结: 通过page cache内存缓存加速文件读写。 本段总结:通过example说明了如何查看系统的page cache。 第五段总结:
+前四段总结:通过例子了解page cache。 本段总结: 介绍了page、 page cache和被换出的page。 </div><div class="post-footer">
+        <a href="/rosy.github.io/posts/%E9%98%85%E8%AF%BBprompt_%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">Read More</a></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/rosy.github.io/posts/%E9%98%85%E8%AF%BBprompt_%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/">阅读prompt_进程管理</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/rosy.github.io/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-06-12">2023-06-12</time></span></div><div class="content">多线程冲突了怎么办？ 分段总结 第一段总结: 提供了互斥锁和信号量两个同步方法。
+第二段总结: 讲述了不同类型的锁,互斥的概念和同步的概念。
+第三段总结:
+前两段总结: 提供了互斥锁和信号量两个同步方法。 本段总结: 详细介绍了信号量的概念和PV操作。 第四段总结:
+前三段总结: 提供了互斥锁和信号量两个同步方法。详细介绍了信号量的概念和PV操作。 本段总结: 使用信号量实现了生产者消费者问题。 第五段总结:
+前四段总结:提供了互斥锁和信号量两个同步方法。使用信号量实现了生产者消费者问题。 本段总结: 分析了哲学家就餐问题,提出了几种解决方案。 第六段总结:
+前五段总结:提供了互斥锁和信号量两个同步方法。使用信号量实现了生产者消费者问题。分析了哲学家就餐问题, 提出了几种解决方案。 本段总结: 分析了读者写者问题,提出了几种解决方案。 怎么避免死锁？ 分段总结 第一段总结:介绍死锁的概念、四个必要条件
+第二段总结:模拟死锁问题的产生并分析代码
+第三段总结:
+前两段总结:介绍死锁和模拟代码 本段总结:利用jstack和pstack + gdb工具排查死锁 第四段总结:
+前三段总结:介绍死锁、模拟代码和排查工具 本段总结:使用资源有序分配法来避免死锁 什么是悲观锁、乐观锁？ 分段总结 第一段总结:演示互斥锁和自旋锁
+第二段总结:介绍读写锁
+第三段总结:
+前两段总结:演示互斥锁和自旋锁 本段总结:谈到读优先锁和写优先锁 第四段总结:
+前三段总结:演示互斥锁和自旋锁,介绍读写锁 本段总结:介绍乐观锁与悲观锁 第五段总结:
+前n-1段总结:演示互斥锁和自旋锁,介绍读写锁,谈到读优先锁和写优先锁,介绍乐观锁与悲观锁 本段总结:总结各种锁 第六段总结:
+前n-1段总结:演示互斥锁和自旋锁,介绍读写锁,谈到读优先锁和写优先锁,介绍乐观锁与悲观锁,总结各种锁 本段总结:回答读者的问题 </div><div class="post-footer">
+        <a href="/rosy.github.io/posts/%E9%98%85%E8%AF%BBprompt_%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/">Read More</a></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/rosy.github.io/posts/%E9%98%85%E8%AF%BBprompt-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">操作系统——内存管理</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/rosy.github.io/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-06-10">2023-06-10</time></span></div><div class="content">为什么要有虚拟内存 流程图 总结 第一段总结:介绍了虚拟内存的主要作用和内存分段。
 第二段总结:解释了内存分段为什么容易产生内存碎片以及内存交换效率低的原因。
 第三段总结:
@@ -74,7 +125,7 @@ TLB即转换查询缓存。位于CPU和MMU之间。 可以缓存最近访问过�
 Linux主要采用的是分页式内存管理。 但是由于x86处理器支持分段式和分页式内存管理,Linux不得不采用段式内存管理。 但是Linux会把所有的段基地址设为0,相当于屏蔽了分段,段只用于访问控制和保护。 问题7:介绍一下Linux虚拟地址空间的布局?
 Linux虚拟地址空间分为:内核空间和用户空间。 用户空间分为:代码段、数据段、BSS段、堆区、文件映射区、栈区。 malloc是如何分配内存的？ 流程图 总结 一段文本的总结如下:
 第一段总结: malloc 分配内存的两种方式及大小阈值。</div><div class="post-footer">
-        <a href="/rosy.github.io/posts/%E9%98%85%E8%AF%BBprompt-%E6%8B%86%E8%A7%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">Read More</a></div>
+        <a href="/rosy.github.io/posts/%E9%98%85%E8%AF%BBprompt-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">Read More</a></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/rosy.github.io/posts/%E4%B8%BAhugo%E6%B7%BB%E5%8A%A0%E6%A0%B7%E5%BC%8F/">解决LoveIt代码块超出屏幕范围的问题</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/rosy.github.io/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-06-09">2023-06-09</time></span></div><div class="content">在themes\Lovelt\assets\css\style.scss底部添加下列代码
@@ -88,20 +139,15 @@ Pod 通常一个Pod有一个应用程序（理论上也可以有多个） 每个
 第一个命令的作用：创建目录并下载minikube 第二个命令的作用：将minikube这个目录添加到环境变量中 如果你不想安装到C盘，这里以安装到D:\Program Files (x86)目录下为例：
 New-Item -Path &#39;D:\Program Files (x86)&#39; -Name &#39;minikube&#39; -ItemType Directory -Force Invoke-WebRequest -OutFile &#39;D:\Program Files (x86)\minikube\minikube.exe&#39; -Uri &#39;https://github.com/kubernetes/minikube/releases/latest/download/minikube-windows-amd64.exe&#39; -UseBasicParsing $oldPath = [Environment]::GetEnvironmentVariable(&#39;Path&#39;, [EnvironmentVariableTarget]::Machine) if ($oldPath.Split(&#39;;&#39;) -inotcontains &#39;D:\Program Files (x86)\minikube&#39;){ ` [Environment]::SetEnvironmentVariable(&#39;Path&#39;, $(&#39;{0};D:\Program Files (x86)\minikube&#39; -f $oldPath), [EnvironmentVariableTarget]::Machine) ` } 启动minikube 首先电脑中要有docker，运行下列命令（第一次启动需要等待一段时间，因为要拉取镜像）：</div><div class="post-footer">
         <a href="/rosy.github.io/posts/k8s%E5%85%A5%E9%97%A8/">Read More</a></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/rosy.github.io/posts/my-first-post/">基于hugo+github page搭建博客</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/rosy.github.io/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-06-08">2023-06-08</time></span></div><div class="content">本地运行 1. 安装 Hugo 首先，从 Hugo 官网 下载并安装适用于您操作系统的 Hugo。
-2. 创建新的 Hugo 站点 打开命令行工具，然后输入以下命令创建一个新的 Hugo 站点：
-hugo new site my-blog 这将在当前目录下创建一个名为 &ldquo;my-blog&rdquo; 的文件夹，其中包含 Hugo 站点的所有文件和目录。
-3. 选择一个主题 浏览 Hugo 主题库，选择一个合适的主题。这里以本博客的主题为例： &ldquo;Loveit&rdquo; ，将其添加到你的站点中：
-cd my-blog git init git submodule add https://github.com/dillonzq/LoveIt.git themes/LoveIt 将主题添加到站点配置文件 config.toml 中：
-theme = &#34;example-theme&#34; 4. 创建内容 使用以下命令创建一篇新的博客文章：
-hugo new posts/my-first-post.md 这将在 content/posts 目录下创建一个名为 &ldquo;my-first-post.md&rdquo; 的 Markdown 文件。编辑该文件，添加您的博客内容。
-5. 预览博客 在本地预览您的博客，输入以下命令：
-hugo server 这将启动一个本地服务器，访问 http://localhost:1313 可以预览您的博客。
-部署到 GitHub Pages 1.</div><div class="post-footer">
-        <a href="/rosy.github.io/posts/my-first-post/">Read More</a></div>
-</article></div></div>
+</article><ul class="pagination"><li class="page-item active">
+                    <span class="page-link">
+                        <a href="/rosy.github.io/">1</a>
+                    </span>
+                </li><li class="page-item ">
+                    <span class="page-link">
+                        <a href="/rosy.github.io/page/2/">2</a>
+                    </span>
+                </li></ul></div></div>
             </main><footer class="footer">
         <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.111.3">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
                 </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/rosy.github.io/" target="_blank"></a></span></div>
