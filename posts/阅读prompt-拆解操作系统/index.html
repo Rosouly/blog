@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>阅读prompt——拆解操作系统 - My New Hugo Site</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="阅读prompt——拆解操作系统" />
+        <title>操作系统——内存管理 - My New Hugo Site</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="操作系统——内存管理" />
 <meta property="og:description" content="为什么要有虚拟内存 流程图 总结 第一段总结:介绍了虚拟内存的主要作用和内存分段。
 第二段总结:解释了内存分段为什么容易产生内存碎片以及内存交换效率低的原因。
 第三段总结:
@@ -28,7 +28,7 @@ Linux虚拟地址空间分为:内核空间和用户空间。 用户空间分为:
 <meta property="article:published_time" content="2023-06-10T14:31:42+08:00" />
 <meta property="article:modified_time" content="2023-06-10T14:31:42+08:00" /><meta property="og:site_name" content="My cool site" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="阅读prompt——拆解操作系统"/>
+<meta name="twitter:title" content="操作系统——内存管理"/>
 <meta name="twitter:description" content="为什么要有虚拟内存 流程图 总结 第一段总结:介绍了虚拟内存的主要作用和内存分段。
 第二段总结:解释了内存分段为什么容易产生内存碎片以及内存交换效率低的原因。
 第三段总结:
@@ -56,12 +56,12 @@ Linux虚拟地址空间分为:内核空间和用户空间。 用户空间分为:
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "阅读prompt——拆解操作系统",
+        "headline": "操作系统——内存管理",
         "inLanguage": "en-us",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/rosouly.github.io\/rosy.github.io\/posts\/%E9%98%85%E8%AF%BBprompt-%E6%8B%86%E8%A7%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F\/"
-        },"genre": "posts","wordcount":  225 ,
+        },"genre": "posts","wordcount":  267 ,
         "url": "https:\/\/rosouly.github.io\/rosy.github.io\/posts\/%E9%98%85%E8%AF%BBprompt-%E6%8B%86%E8%A7%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F\/","datePublished": "2023-06-10T14:31:42+08:00","dateModified": "2023-06-10T14:31:42+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -101,9 +101,9 @@ Linux虚拟地址空间分为:内核空间和用户空间。 用户空间分为:
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">Contents</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">阅读prompt——拆解操作系统</h1><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">操作系统——内存管理</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/rosy.github.io/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-06-10">2023-06-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;225 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-06-10">2023-06-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;267 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -135,7 +135,9 @@ Linux虚拟地址空间分为:内核空间和用户空间。 用户空间分为:
     </li>
     <li><a href="#在-4gb-物理内存的机器上申请-8g-内存会怎么样">在 4GB 物理内存的机器上，申请 8G 内存会怎么样？</a>
       <ul>
+        <li><a href="#流程图-3">流程图</a></li>
         <li><a href="#总结-3">总结</a></li>
+        <li><a href="#问答-3">问答</a></li>
       </ul>
     </li>
   </ul>
@@ -354,6 +356,15 @@ TLB的命中率高,能大大提高地址转换效率。
 <pre><code>我们可以通过调整/proc/[pid]/oom_score_adj为负数值来降低一个进程被OOMKiller杀掉的几率,最低-1000。但是一般不建议直接将值设为-1000,因为可能导致内存泄漏的进程无法被杀死。
 </code></pre>
 <h2 id="在-4gb-物理内存的机器上申请-8g-内存会怎么样">在 4GB 物理内存的机器上，申请 8G 内存会怎么样？</h2>
+<h3 id="流程图-3">流程图</h3>
+<p><img
+        class="lazyload"
+        src="/rosy.github.io/svg/loading.min.svg"
+        data-src="/rosy.github.io/images/%e5%9c%a84GB%e7%89%a9%e7%90%86%e5%86%85%e5%ad%98%e7%9a%84%e6%9c%ba%e5%99%a8%e4%b8%8a%ef%bc%8c%e7%94%b3%e8%af%b78G%e5%86%85%e5%ad%98%e4%bc%9a%e6%80%8e%e4%b9%88%e6%a0%b7%ef%bc%9f.png"
+        data-srcset="/rosy.github.io/images/%e5%9c%a84GB%e7%89%a9%e7%90%86%e5%86%85%e5%ad%98%e7%9a%84%e6%9c%ba%e5%99%a8%e4%b8%8a%ef%bc%8c%e7%94%b3%e8%af%b78G%e5%86%85%e5%ad%98%e4%bc%9a%e6%80%8e%e4%b9%88%e6%a0%b7%ef%bc%9f.png, /rosy.github.io/images/%e5%9c%a84GB%e7%89%a9%e7%90%86%e5%86%85%e5%ad%98%e7%9a%84%e6%9c%ba%e5%99%a8%e4%b8%8a%ef%bc%8c%e7%94%b3%e8%af%b78G%e5%86%85%e5%ad%98%e4%bc%9a%e6%80%8e%e4%b9%88%e6%a0%b7%ef%bc%9f.png 1.5x, /rosy.github.io/images/%e5%9c%a84GB%e7%89%a9%e7%90%86%e5%86%85%e5%ad%98%e7%9a%84%e6%9c%ba%e5%99%a8%e4%b8%8a%ef%bc%8c%e7%94%b3%e8%af%b78G%e5%86%85%e5%ad%98%e4%bc%9a%e6%80%8e%e4%b9%88%e6%a0%b7%ef%bc%9f.png 2x"
+        data-sizes="auto"
+        alt="/rosy.github.io/images/在4GB物理内存的机器上，申请8G内存会怎么样？.png"
+        title="Alt text" /></p>
 <h3 id="总结-3">总结</h3>
 <p>第一段总结: 申请8G内存的情况在32位和64位操作系统下表现不同。32位只能申请3G,所以申请8G会失败;64位理论上可以申请128T,所以申请8G不会有问题。</p>
 <p>第二段总结: 在64位操作系统下,没有Swap分区时候申请超过物理内存的虚拟内存,会因为OOM被杀死。</p>
@@ -387,7 +398,7 @@ TLB的命中率高,能大大提高地址转换效率。
 <li>前七段总结: 有Swap 分区的进程使用虚拟内存并非无限。</li>
 <li>本段总结: 总结申请8G内存的不同场景。</li>
 </ul>
-<h4 id="问答-3">问答</h4>
+<h3 id="问答-3">问答</h3>
 <p>问题1:详细说明分别在32和64位位系统下。在 4GB 物理内存的机器上,申请 8G 内存会怎么样?</p>
 <pre><code>在32位系统下:
 进程最大只能申请3GB左右的虚拟内存,所以申请8GB内存会直接失败,报Cannot allocate memory错误。
@@ -405,6 +416,21 @@ TLB的命中率高,能大大提高地址转换效率。
 64位系统进程可以使用接近128TB大小的虚拟地址空间,即使物理内存小,也可以通过Swap来进行内存交换,从而使用超出物理内存大小的虚拟内存
 总的来说,申请虚拟内存主要看操作系统位数,分配物理内存则还要考虑是否访问了该虚拟内存以及是否有Swap分区。
 </code></pre>
+<p>问题3：为什么32位的操作系统只能分配3G虚拟内存？如何计算的？</p>
+<pre><code>32位操作系统使用32位地址空间来表示内存地址，这意味着它可以表示的最大地址数量是 2^32。换算成字节，我们得到：
+
+2^32 字节 = 4,294,967,296 字节 = 4 GB
+然而，并非所有的4 GB地址空间都用于用户程序的虚拟内存。通常，32位操作系统会在用户空间和内核空间之间划分地址空间。内核空间通常会保留1 GB（在某些系统中可能不同），这样用户空间就剩下3 GB可用于分配虚拟内存。因此，32位操作系统通常只能分配最多3 GB的虚拟内存。
+</code></pre>
+<p>问题4：为什么64位的操作系统只能分配128T虚拟内存？如何计算的？</p>
+<pre><code>64位操作系统使用64位地址空间来表示内存地址，理论上可以表示的最大地址数量是 2^64。换算成字节，我们得到：
+
+
+2^64 字节 = 18,446,744,073,709,551,616 字节 ≈ 18 EB（艾字节）
+然而，在实际应用中，操作系统和硬件并不会使用整个64位地址空间。这是因为使用如此大的地址空间会导致内存管理和硬件成本过高。因此，许多64位操作系统只实现了一个子集的虚拟地址空间。例如，x86-64架构（也称为AMD64或Intel 64）实际上只实现了48位虚拟地址空间，这意味着它可以表示的最大地址数量是 2^48。换算成字节，我们得到：
+
+2^48 字节 = 281,474,976,710,656 字节 = 256 TB
+然而，这256 TB的地址空间通常会在用户空间和内核空间之间划分。在典型的x86-64系统中，用户空间可用的虚拟内存通常限制在128 TB以下。不过，这个限制在不同操作系统和硬件平台上可能有所不同。</code></pre>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
@@ -414,7 +440,7 @@ TLB的命中率高,能大大提高地址转换效率。
         <div class="post-info-line">
             <div class="post-info-md"></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://rosouly.github.io/rosy.github.io/posts/%E9%98%85%E8%AF%BBprompt-%E6%8B%86%E8%A7%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" data-title="阅读prompt——拆解操作系统"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://rosouly.github.io/rosy.github.io/posts/%E9%98%85%E8%AF%BBprompt-%E6%8B%86%E8%A7%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://rosouly.github.io/rosy.github.io/posts/%E9%98%85%E8%AF%BBprompt-%E6%8B%86%E8%A7%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" data-title="阅读prompt——拆解操作系统"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://rosouly.github.io/rosy.github.io/posts/%E9%98%85%E8%AF%BBprompt-%E6%8B%86%E8%A7%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" data-title="阅读prompt——拆解操作系统"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://rosouly.github.io/rosy.github.io/posts/%E9%98%85%E8%AF%BBprompt-%E6%8B%86%E8%A7%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" data-title="阅读prompt——拆解操作系统"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://rosouly.github.io/rosy.github.io/posts/%E9%98%85%E8%AF%BBprompt-%E6%8B%86%E8%A7%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" data-title="操作系统——内存管理"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://rosouly.github.io/rosy.github.io/posts/%E9%98%85%E8%AF%BBprompt-%E6%8B%86%E8%A7%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://rosouly.github.io/rosy.github.io/posts/%E9%98%85%E8%AF%BBprompt-%E6%8B%86%E8%A7%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" data-title="操作系统——内存管理"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://rosouly.github.io/rosy.github.io/posts/%E9%98%85%E8%AF%BBprompt-%E6%8B%86%E8%A7%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" data-title="操作系统——内存管理"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://rosouly.github.io/rosy.github.io/posts/%E9%98%85%E8%AF%BBprompt-%E6%8B%86%E8%A7%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" data-title="操作系统——内存管理"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
