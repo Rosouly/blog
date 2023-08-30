@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>操作系统——网络系统 - My New Hugo Site</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="操作系统——网络系统" />
-<meta property="og:description" content="什么是零拷贝？ 分段总结 第一段总结:简单介绍什么是零拷贝
+<meta property="og:description" content="优化文件传输的方式 分段总结 第一段总结:简单介绍什么是零拷贝
 第二段总结:介绍DMA技术的作用
 第三段总结:传统的文件传输存在上下文切换和数据拷贝次数多的问题
 第四段总结:零拷贝技术通过降低上下文切换和数据拷贝次数优化文件传输性能
@@ -13,24 +13,21 @@
 第六段总结:介绍PageCache的作用以及对零拷贝的进一步优化
 第七段总结: 针对大文件的传输应该使用异步IO&#43;直接IO代替零拷贝
 前六段总结:概括零拷贝技术 本段总结: 为大文件传输提供了更优方法 第八段总结:
-前七段总结:讲解零拷贝技术和PageCache、直接IO等优化技术 本段总结: 总结零拷贝相关技术原理 I/O 多路复用：select/poll/epoll 分段总结 第一段总结: 最基本的 Socket 模型,描述了通过 Socket 实现 TCP 网络连接的基本过程。
-第二段总结: 如何服务更多的用户?通过多进程模型和多线程模型来支持高并发。
-第三段总结:
-前两段总结:使用多进程/多线程模型来支持高并发。 本段总结:介绍了 I/O 多路复用技术。 第四段总结:
-前三段总结:使用多进程/多线程模型和 I/O 多路复用来实现高并发。 本段总结:介绍了 select/poll 的工作方式。 第五段总结:
-前四段总结:介绍了 select/poll 和多进程多线程模型。 本段总结: 介绍了 epoll 的工作方式。 第六段总结:
-前五段总结:介绍了 select/poll/epoll 的工作方式。 本段总结:总结了 select/poll 和 epoll 的区别。 第一段总结:一致性散列算法解决了分布式系统如何分配请求的问题。
-第二段总结:基于取模算法有问题需要一致性散列算法。
-第三段总结:
-前两段总结:一致性散列算法将节点和数据映射到哈希环上。 本段总结:一致性散列算法查询是顺时针找到第一个节点。 第四段总结:
-前三段总结:一致性散列算法在增加或减少节点时只影响有限的数据。 本段总结:但没有均匀分布引入虚拟节点。 " />
+前七段总结:讲解零拷贝技术和PageCache、直接IO等优化技术 本段总结: 总结零拷贝相关技术原理 问答 问题1:什么是零拷贝技术?作用是什么?
+零拷贝技术是一种优化文件传输的方式,可以大幅减少传输过程中的CPU上下文切换次数和数据拷贝次数。具体来说: 降低上下文切换的次数:通过一次系统调用(如sendfile)可以完成读取磁盘和发送网络两个动作,减少了系统调用次数。 减少数据拷贝的次数:通过内核直接将磁盘数据拷贝到网络缓冲区,而非先拷贝到用户空间。 减少CPU参与数据搬运:通过DMA直接将磁盘数据搬运到网络缓冲区,不用CPU参与。 这些优化的作用是大幅提高文件传输的效率和吞吐量。 问题2:什么是DMA技术?作用是什么?
+DMA(Direct Memory Access)直接内存访问技术。 作用是将I/O设备和内存之间的数据传输工作交给DMA控制器完成,而不是由CPU来完成。这样CPU就可以空闲出来执行其他任务,利用CPU的性能。 问题3:文件传输中的上下文切换具体是什么?
+在文件传输过程中,需要从用户空间切换到内核态(系统调用),然后内核实现磁盘读取或网络发送操作,最后再从内核态切换回用户态。 这两个切换调用就称为一次上下文切换。传统文件传输方式需要多次系统调用,就需要多次上下文切换。 问题4:文件传输中为什么会发生数据拷贝?
+传统文件传输方式会涉及多次的数据拷贝: 把磁盘数据拷贝到内核缓冲区 把内核缓冲区的数据拷贝到用户缓冲区 从用户缓冲区拷贝到网络缓冲区 把网络缓冲区的数据拷贝到网卡 问题5:mmap&#43;write和sendfile如何实现零拷贝?
+mmap &#43; write: 通过mmap函数来映射内核缓冲区,省去拷贝到用户缓冲区这一步。 sendfile: 直接将内核缓冲区的数据拷贝到网络缓冲区,而非先拷贝到用户缓冲区。通过一次系统调用代替读写两个系统调用,减少上下文切换。 问题6:PageCahce的作用?
+PageCache作为磁盘缓存,用来缓存最近访问的数据。它的作用主要有两个: 缓存最近被访问的数据,提高访问效率 通过预读及I/O合并,减少磁盘寻址和寻道时间,加快读取数据速度 问题7:如何对零拷贝进一步优化? 对零拷贝进一步优化的方法主要有: 使用scatter-gather DMA技术。 使用memcopy高效接口,如Intel的SOFTIRQ。 使用多核 CPU 提高DMA效率。 优化CPU和内存之间的TLB效率。 问题8:为什么针对大文件的传输应该使用异步IO&#43;直接IO代替零拷贝?展开说明这一方案的具体过程。
+对于大文件的传输: 难以充分利用PageCache,而PageCache又会被大量占用,影响小文件的读写。 大文件数据难以命中PageCache,多次DMA拷贝到PageCache会造成额外性能损耗。 因此,应该使用异步I/O &#43; 直接I/O来传输大文件: 使用异步I/O,可以在磁盘读就位之前返回,用户进程可以执行其他任务,避免阻塞。 使用直接I/O,绕过PageCache,避免PageCache占用和额外的一次DMA拷贝。 直接I/O无法利用I/O合并和预读的优化,但对大文件来说影响不大。 总的来说,这种方式可以有效地传输大文件,而不会影响PageCache的性能。 own word DMA：是一种将文件数据从磁盘拷贝到内核缓冲区的技术，减轻CPU的负担 传统的文件传输方式 四次拷贝 调用read，然后由DMA从磁盘拷贝到内核缓冲区 由cpu从内核缓冲区拷贝到用户缓冲区 调用write，由cpu从用户缓冲区拷贝到网络缓冲区（socket） 由DMA从网络缓冲区拷贝到网卡 四次上下文切换 调用read，进程由用户态切换到内核态，完成后再切换到用户态 调用write，进程由用户态切换到内核态，完成后再切换到用户态 如何优化文件传输的性能？ 减少拷贝：从内核缓冲区拷贝到用户缓冲区，再从用户缓冲区拷贝到socket是没有必要的 减少上下文切换：每次系统调用就会有两次上下文切换，所以要减少系统调用 mmap &#43; write mmap: 将内核缓冲区的数据映射到用户缓冲区，用户缓冲区并不是真正存储了这些数据，这样调用write的时候，就可以由CPU直接从内核缓冲区拷贝到socket中，减少了一次数据拷贝 sendfile 实现：传统的read&#43;write分别定义了源文件和目的文件描述符，sendfile直接定义了两者，这样就可以直接从内核缓冲区拷贝到socket中，减少了一次数据拷贝的同时，减少了一次系统调通，即减少了两次上下文切换 如果网卡支持（零拷贝） 可以从内核缓冲区直接拷贝到网卡，减少一次数据拷贝 零拷贝的思想就是，将文件的拷贝完全交给DMA，全程不用CPU参与 I/O 多路复用：select/poll/epoll 分段总结 第一段总结: 最基本的 Socket 模型,描述了通过 Socket 实现 TCP 网络连接的基本过程。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://rosouly.github.io/rosy.github.io/posts/%E9%98%85%E8%AF%BBprompt_%E7%BD%91%E7%BB%9C%E7%B3%BB%E7%BB%9F/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-06-12T11:34:52+08:00" />
 <meta property="article:modified_time" content="2023-06-12T11:34:52+08:00" /><meta property="og:site_name" content="My cool site" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="操作系统——网络系统"/>
-<meta name="twitter:description" content="什么是零拷贝？ 分段总结 第一段总结:简单介绍什么是零拷贝
+<meta name="twitter:description" content="优化文件传输的方式 分段总结 第一段总结:简单介绍什么是零拷贝
 第二段总结:介绍DMA技术的作用
 第三段总结:传统的文件传输存在上下文切换和数据拷贝次数多的问题
 第四段总结:零拷贝技术通过降低上下文切换和数据拷贝次数优化文件传输性能
@@ -38,21 +35,18 @@
 第六段总结:介绍PageCache的作用以及对零拷贝的进一步优化
 第七段总结: 针对大文件的传输应该使用异步IO&#43;直接IO代替零拷贝
 前六段总结:概括零拷贝技术 本段总结: 为大文件传输提供了更优方法 第八段总结:
-前七段总结:讲解零拷贝技术和PageCache、直接IO等优化技术 本段总结: 总结零拷贝相关技术原理 I/O 多路复用：select/poll/epoll 分段总结 第一段总结: 最基本的 Socket 模型,描述了通过 Socket 实现 TCP 网络连接的基本过程。
-第二段总结: 如何服务更多的用户?通过多进程模型和多线程模型来支持高并发。
-第三段总结:
-前两段总结:使用多进程/多线程模型来支持高并发。 本段总结:介绍了 I/O 多路复用技术。 第四段总结:
-前三段总结:使用多进程/多线程模型和 I/O 多路复用来实现高并发。 本段总结:介绍了 select/poll 的工作方式。 第五段总结:
-前四段总结:介绍了 select/poll 和多进程多线程模型。 本段总结: 介绍了 epoll 的工作方式。 第六段总结:
-前五段总结:介绍了 select/poll/epoll 的工作方式。 本段总结:总结了 select/poll 和 epoll 的区别。 第一段总结:一致性散列算法解决了分布式系统如何分配请求的问题。
-第二段总结:基于取模算法有问题需要一致性散列算法。
-第三段总结:
-前两段总结:一致性散列算法将节点和数据映射到哈希环上。 本段总结:一致性散列算法查询是顺时针找到第一个节点。 第四段总结:
-前三段总结:一致性散列算法在增加或减少节点时只影响有限的数据。 本段总结:但没有均匀分布引入虚拟节点。 "/>
+前七段总结:讲解零拷贝技术和PageCache、直接IO等优化技术 本段总结: 总结零拷贝相关技术原理 问答 问题1:什么是零拷贝技术?作用是什么?
+零拷贝技术是一种优化文件传输的方式,可以大幅减少传输过程中的CPU上下文切换次数和数据拷贝次数。具体来说: 降低上下文切换的次数:通过一次系统调用(如sendfile)可以完成读取磁盘和发送网络两个动作,减少了系统调用次数。 减少数据拷贝的次数:通过内核直接将磁盘数据拷贝到网络缓冲区,而非先拷贝到用户空间。 减少CPU参与数据搬运:通过DMA直接将磁盘数据搬运到网络缓冲区,不用CPU参与。 这些优化的作用是大幅提高文件传输的效率和吞吐量。 问题2:什么是DMA技术?作用是什么?
+DMA(Direct Memory Access)直接内存访问技术。 作用是将I/O设备和内存之间的数据传输工作交给DMA控制器完成,而不是由CPU来完成。这样CPU就可以空闲出来执行其他任务,利用CPU的性能。 问题3:文件传输中的上下文切换具体是什么?
+在文件传输过程中,需要从用户空间切换到内核态(系统调用),然后内核实现磁盘读取或网络发送操作,最后再从内核态切换回用户态。 这两个切换调用就称为一次上下文切换。传统文件传输方式需要多次系统调用,就需要多次上下文切换。 问题4:文件传输中为什么会发生数据拷贝?
+传统文件传输方式会涉及多次的数据拷贝: 把磁盘数据拷贝到内核缓冲区 把内核缓冲区的数据拷贝到用户缓冲区 从用户缓冲区拷贝到网络缓冲区 把网络缓冲区的数据拷贝到网卡 问题5:mmap&#43;write和sendfile如何实现零拷贝?
+mmap &#43; write: 通过mmap函数来映射内核缓冲区,省去拷贝到用户缓冲区这一步。 sendfile: 直接将内核缓冲区的数据拷贝到网络缓冲区,而非先拷贝到用户缓冲区。通过一次系统调用代替读写两个系统调用,减少上下文切换。 问题6:PageCahce的作用?
+PageCache作为磁盘缓存,用来缓存最近访问的数据。它的作用主要有两个: 缓存最近被访问的数据,提高访问效率 通过预读及I/O合并,减少磁盘寻址和寻道时间,加快读取数据速度 问题7:如何对零拷贝进一步优化? 对零拷贝进一步优化的方法主要有: 使用scatter-gather DMA技术。 使用memcopy高效接口,如Intel的SOFTIRQ。 使用多核 CPU 提高DMA效率。 优化CPU和内存之间的TLB效率。 问题8:为什么针对大文件的传输应该使用异步IO&#43;直接IO代替零拷贝?展开说明这一方案的具体过程。
+对于大文件的传输: 难以充分利用PageCache,而PageCache又会被大量占用,影响小文件的读写。 大文件数据难以命中PageCache,多次DMA拷贝到PageCache会造成额外性能损耗。 因此,应该使用异步I/O &#43; 直接I/O来传输大文件: 使用异步I/O,可以在磁盘读就位之前返回,用户进程可以执行其他任务,避免阻塞。 使用直接I/O,绕过PageCache,避免PageCache占用和额外的一次DMA拷贝。 直接I/O无法利用I/O合并和预读的优化,但对大文件来说影响不大。 总的来说,这种方式可以有效地传输大文件,而不会影响PageCache的性能。 own word DMA：是一种将文件数据从磁盘拷贝到内核缓冲区的技术，减轻CPU的负担 传统的文件传输方式 四次拷贝 调用read，然后由DMA从磁盘拷贝到内核缓冲区 由cpu从内核缓冲区拷贝到用户缓冲区 调用write，由cpu从用户缓冲区拷贝到网络缓冲区（socket） 由DMA从网络缓冲区拷贝到网卡 四次上下文切换 调用read，进程由用户态切换到内核态，完成后再切换到用户态 调用write，进程由用户态切换到内核态，完成后再切换到用户态 如何优化文件传输的性能？ 减少拷贝：从内核缓冲区拷贝到用户缓冲区，再从用户缓冲区拷贝到socket是没有必要的 减少上下文切换：每次系统调用就会有两次上下文切换，所以要减少系统调用 mmap &#43; write mmap: 将内核缓冲区的数据映射到用户缓冲区，用户缓冲区并不是真正存储了这些数据，这样调用write的时候，就可以由CPU直接从内核缓冲区拷贝到socket中，减少了一次数据拷贝 sendfile 实现：传统的read&#43;write分别定义了源文件和目的文件描述符，sendfile直接定义了两者，这样就可以直接从内核缓冲区拷贝到socket中，减少了一次数据拷贝的同时，减少了一次系统调通，即减少了两次上下文切换 如果网卡支持（零拷贝） 可以从内核缓冲区直接拷贝到网卡，减少一次数据拷贝 零拷贝的思想就是，将文件的拷贝完全交给DMA，全程不用CPU参与 I/O 多路复用：select/poll/epoll 分段总结 第一段总结: 最基本的 Socket 模型,描述了通过 Socket 实现 TCP 网络连接的基本过程。"/>
 <meta name="application-name" content="My cool site">
 <meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://rosouly.github.io/rosy.github.io/posts/%E9%98%85%E8%AF%BBprompt_%E7%BD%91%E7%BB%9C%E7%B3%BB%E7%BB%9F/" /><link rel="prev" href="https://rosouly.github.io/rosy.github.io/posts/%E9%98%85%E8%AF%BBprompt_%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" /><link rel="stylesheet" href="/rosy.github.io/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://rosouly.github.io/rosy.github.io/posts/%E9%98%85%E8%AF%BBprompt_%E7%BD%91%E7%BB%9C%E7%B3%BB%E7%BB%9F/" /><link rel="prev" href="https://rosouly.github.io/rosy.github.io/posts/%E9%98%85%E8%AF%BBprompt_%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" /><link rel="next" href="https://rosouly.github.io/rosy.github.io/posts/k8s/" /><link rel="stylesheet" href="/rosy.github.io/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
     {
@@ -63,7 +57,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/rosouly.github.io\/rosy.github.io\/posts\/%E9%98%85%E8%AF%BBprompt_%E7%BD%91%E7%BB%9C%E7%B3%BB%E7%BB%9F\/"
-        },"genre": "posts","wordcount":  68 ,
+        },"genre": "posts","wordcount":  239 ,
         "url": "https:\/\/rosouly.github.io\/rosy.github.io\/posts\/%E9%98%85%E8%AF%BBprompt_%E7%BD%91%E7%BB%9C%E7%B3%BB%E7%BB%9F\/","datePublished": "2023-06-12T11:34:52+08:00","dateModified": "2023-06-12T11:34:52+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -105,8 +99,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">操作系统——网络系统</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/rosy.github.io/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-06-12">2023-06-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;68 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-06-12">2023-06-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;239 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -114,20 +108,23 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#什么是零拷贝">什么是零拷贝？</a>
+    <li><a href="#优化文件传输的方式">优化文件传输的方式</a>
       <ul>
         <li><a href="#分段总结">分段总结</a></li>
+        <li><a href="#问答">问答</a></li>
+        <li><a href="#own-word">own word</a></li>
       </ul>
     </li>
     <li><a href="#io-多路复用selectpollepoll">I/O 多路复用：select/poll/epoll</a>
       <ul>
         <li><a href="#分段总结-1">分段总结</a></li>
+        <li><a href="#问答-1">问答</a></li>
       </ul>
     </li>
-    <li><a href="#heading"></a></li>
+    <li><a href="#一致性哈希">一致性哈希</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h2 id="什么是零拷贝">什么是零拷贝？</h2>
+            </div><div class="content" id="content"><h2 id="优化文件传输的方式">优化文件传输的方式</h2>
 <h3 id="分段总结">分段总结</h3>
 <p>第一段总结:简单介绍什么是零拷贝</p>
 <p>第二段总结:介绍DMA技术的作用</p>
@@ -144,6 +141,117 @@
 <ul>
 <li>前七段总结:讲解零拷贝技术和PageCache、直接IO等优化技术</li>
 <li>本段总结: 总结零拷贝相关技术原理</li>
+</ul>
+<h3 id="问答">问答</h3>
+<p>问题1:什么是零拷贝技术?作用是什么?</p>
+<pre><code>零拷贝技术是一种优化文件传输的方式,可以大幅减少传输过程中的CPU上下文切换次数和数据拷贝次数。具体来说:
+
+降低上下文切换的次数:通过一次系统调用(如sendfile)可以完成读取磁盘和发送网络两个动作,减少了系统调用次数。
+
+减少数据拷贝的次数:通过内核直接将磁盘数据拷贝到网络缓冲区,而非先拷贝到用户空间。
+
+减少CPU参与数据搬运:通过DMA直接将磁盘数据搬运到网络缓冲区,不用CPU参与。
+
+这些优化的作用是大幅提高文件传输的效率和吞吐量。
+</code></pre>
+<p>问题2:什么是DMA技术?作用是什么?</p>
+<pre><code>DMA(Direct Memory Access)直接内存访问技术。
+
+作用是将I/O设备和内存之间的数据传输工作交给DMA控制器完成,而不是由CPU来完成。这样CPU就可以空闲出来执行其他任务,利用CPU的性能。
+</code></pre>
+<p>问题3:文件传输中的上下文切换具体是什么?</p>
+<pre><code>在文件传输过程中,需要从用户空间切换到内核态(系统调用),然后内核实现磁盘读取或网络发送操作,最后再从内核态切换回用户态。
+
+这两个切换调用就称为一次上下文切换。传统文件传输方式需要多次系统调用,就需要多次上下文切换。
+</code></pre>
+<p>问题4:文件传输中为什么会发生数据拷贝?</p>
+<pre><code>传统文件传输方式会涉及多次的数据拷贝:
+
+把磁盘数据拷贝到内核缓冲区
+把内核缓冲区的数据拷贝到用户缓冲区
+从用户缓冲区拷贝到网络缓冲区
+把网络缓冲区的数据拷贝到网卡
+</code></pre>
+<p>问题5:mmap+write和sendfile如何实现零拷贝?</p>
+<pre><code>mmap + write: 通过mmap函数来映射内核缓冲区,省去拷贝到用户缓冲区这一步。
+
+sendfile: 直接将内核缓冲区的数据拷贝到网络缓冲区,而非先拷贝到用户缓冲区。通过一次系统调用代替读写两个系统调用,减少上下文切换。
+</code></pre>
+<p>问题6:PageCahce的作用?</p>
+<pre><code>PageCache作为磁盘缓存,用来缓存最近访问的数据。它的作用主要有两个:
+
+缓存最近被访问的数据,提高访问效率
+通过预读及I/O合并,减少磁盘寻址和寻道时间,加快读取数据速度
+问题7:如何对零拷贝进一步优化?
+
+对零拷贝进一步优化的方法主要有:
+
+使用scatter-gather DMA技术。
+使用memcopy高效接口,如Intel的SOFTIRQ。
+使用多核 CPU 提高DMA效率。
+优化CPU和内存之间的TLB效率。
+</code></pre>
+<p>问题8:为什么针对大文件的传输应该使用异步IO+直接IO代替零拷贝?展开说明这一方案的具体过程。</p>
+<pre><code>对于大文件的传输:
+
+难以充分利用PageCache,而PageCache又会被大量占用,影响小文件的读写。
+
+大文件数据难以命中PageCache,多次DMA拷贝到PageCache会造成额外性能损耗。
+
+因此,应该使用异步I/O + 直接I/O来传输大文件:
+
+使用异步I/O,可以在磁盘读就位之前返回,用户进程可以执行其他任务,避免阻塞。
+
+使用直接I/O,绕过PageCache,避免PageCache占用和额外的一次DMA拷贝。
+
+直接I/O无法利用I/O合并和预读的优化,但对大文件来说影响不大。
+
+总的来说,这种方式可以有效地传输大文件,而不会影响PageCache的性能。
+</code></pre>
+<h3 id="own-word">own word</h3>
+<ul>
+<li>DMA：是一种将文件数据从磁盘拷贝到内核缓冲区的技术，减轻CPU的负担</li>
+<li>传统的文件传输方式
+<ul>
+<li>四次拷贝
+<ul>
+<li>调用read，然后由DMA从磁盘拷贝到内核缓冲区</li>
+<li>由cpu从内核缓冲区拷贝到用户缓冲区</li>
+<li>调用write，由cpu从用户缓冲区拷贝到网络缓冲区（socket）</li>
+<li>由DMA从网络缓冲区拷贝到网卡</li>
+</ul>
+</li>
+<li>四次上下文切换
+<ul>
+<li>调用read，进程由用户态切换到内核态，完成后再切换到用户态</li>
+<li>调用write，进程由用户态切换到内核态，完成后再切换到用户态</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>如何优化文件传输的性能？
+<ul>
+<li>减少拷贝：从内核缓冲区拷贝到用户缓冲区，再从用户缓冲区拷贝到socket是没有必要的</li>
+<li>减少上下文切换：每次系统调用就会有两次上下文切换，所以要减少系统调用</li>
+</ul>
+</li>
+<li>mmap + write
+<ul>
+<li>mmap: 将内核缓冲区的数据映射到用户缓冲区，用户缓冲区并不是真正存储了这些数据，这样调用write的时候，就可以由CPU直接从内核缓冲区拷贝到socket中，减少了一次数据拷贝</li>
+</ul>
+</li>
+<li>sendfile
+<ul>
+<li>实现：传统的read+write分别定义了源文件和目的文件描述符，sendfile直接定义了两者，这样就可以直接从内核缓冲区拷贝到socket中，减少了一次数据拷贝的同时，减少了一次系统调通，即减少了两次上下文切换</li>
+</ul>
+</li>
+<li>如果网卡支持（零拷贝）
+<ul>
+<li>可以从内核缓冲区直接拷贝到网卡，减少一次数据拷贝</li>
+<li>零拷贝的思想就是，将文件的拷贝完全交给DMA，全程不用CPU参与</li>
+</ul>
+</li>
+<li></li>
 </ul>
 <h2 id="io-多路复用selectpollepoll">I/O 多路复用：select/poll/epoll</h2>
 <h3 id="分段总结-1">分段总结</h3>
@@ -169,7 +277,62 @@
 <li>前五段总结:介绍了 select/poll/epoll 的工作方式。</li>
 <li>本段总结:总结了 select/poll 和 epoll 的区别。</li>
 </ul>
-<h2 id="heading"></h2>
+<h3 id="问答-1">问答</h3>
+<p>问题1:最基本的Socket模型。</p>
+<pre><code>• 服务端首先调用 socket() 函数创建 Socket,然后调用 bind() 函数给 Socket 绑定 IP 和端口。
+• 绑定 IP和端口的目的是内核通过 IP和端口将数据分发给正确的应用程序。
+• 绑定后调用 listen() 函数监听,客户端调用 connect() 函数发起连接。
+• 服务端调用 accept() 函数从内核获取客户端的连接,建立了通信通道。
+• 监听 Socket 和已连接 Socket 是两个不同的 Socket。
+• 客户端和服务端通过 read()/write() 函数读写数据。
+</code></pre>
+<p>问题2:什么是 I/O 多路复用技术?</p>
+<pre><code>I/O 多路复用技术允许一个进程使用单个操作来监视多个文件描述符,这样只要一个进程就可以监视多个服务请求,实现服务端优雅的并发。
+</code></pre>
+<p>问题3:什么是 select/poll?</p>
+<pre><code>select/poll 是 I/O多路复用的api,允许进程监视多个文件描述符。
+不同之处在于 select 使用固定长度的位图来存储文件描述符,而 poll 使用链表。
+二者都需要内核遍历所有文件描述符,并且需要在内核态和用户态之间拷贝文件描述符集合。
+</code></pre>
+<p>问题4:什么是 epoll?</p>
+<pre><code>epoll 改进了 select/poll 的缺点。
+它使用红黑树在内核维护所有待监视的文件描述符,不需要像 select/poll 一样每次都传入所有文件描述符。
+它使用事件驱动的方式,只返回有事件产生的文件描述符,避免了文件描述符遍历。
+</code></pre>
+<p>问题5:什么是边缘触发?什么是水平触发?</p>
+<pre><code>边缘触发:当文件描述符的事件被触发时,内核只通知一次,我们需要一次读取完所有数据。
+通常和非阻塞 I/O 一起使用。
+
+水平触发:当文件描述符的事件被触发时,内核会不停通知,直到数据读取完毕。
+通常和阻塞 I/O 一起使用。
+</code></pre>
+<p>6:什么是位图?</p>
+<pre><code>位图是一种数据结构,使用二进制数表示某种数据。
+常见形式是有n位,每一位代表一个对象,1表示该对象有效,0表示无效。
+
+select 使用固定长度的位图来存储文件描述符集合,效率较低。
+</code></pre>
+<p>7:为什么select/poll要遍历所有文件描述符?为什么要在内核态和用户态之间拷贝文件描述符集合?</p>
+<pre><code>因为select/poll是将所有文件描述符集合传给内核后,由内核遍历判断哪些有事件产生。
+
+需要在内核态和用户态之间拷贝文件描述符集合是因为:
+
+首先用户态把文件描述符集合传给内核态。
+内核遍历文件描述符集合后,修改可读/可写的文件描述符标志。
+内核再将修改后的文件描述符集合返回给用户态。
+</code></pre>
+<p>8:什么是红黑树?</p>
+<pre><code>红黑树是一种自平衡的二叉查找树,可以保持接近平衡。
+
+它的主要特点是:任何节点的左右子树高度差不会超过1,树的高度包括结点个数的对数因素。
+它通过修改结点的指针和颜色让树得以平衡。有黑色结点和红色结点两种。
+红黑树的主要优点是:
+
+查找、插入和删除的时间复杂度都是 O(logn)
+在最坏情况下,树的高度会相差1
+所以epoll使用红黑树来代替文件描述符的线性表,大大提高了遍历效率。
+</code></pre>
+<h2 id="一致性哈希">一致性哈希</h2>
 <p>第一段总结:一致性散列算法解决了分布式系统如何分配请求的问题。</p>
 <p>第二段总结:基于取模算法有问题需要一致性散列算法。</p>
 <p>第三段总结:</p>
@@ -203,7 +366,8 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/rosy.github.io/posts/%E9%98%85%E8%AF%BBprompt_%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" class="prev" rel="prev" title="操作系统——文件系统"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>操作系统——文件系统</a></div>
+    <div class="post-nav"><a href="/rosy.github.io/posts/%E9%98%85%E8%AF%BBprompt_%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" class="prev" rel="prev" title="操作系统——文件系统"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>操作系统——文件系统</a>
+            <a href="/rosy.github.io/posts/k8s/" class="next" rel="next" title="K8s">K8s<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></div>
             </main><footer class="footer">

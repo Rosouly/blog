@@ -10,7 +10,11 @@
 第三段总结:
 前两段总结: 内核的page cache机制用于加速文件读写。 本段总结:文章介绍了page cache的工作原理。 第四段总结:
 前三段总结: 通过page cache内存缓存加速文件读写。 本段总结:通过example说明了如何查看系统的page cache。 第五段总结:
-前四段总结:通过例子了解page cache。 本段总结: 介绍了page、 page cache和被换出的page。 " />
+前四段总结:通过例子了解page cache。 本段总结: 介绍了page、 page cache和被换出的page。 问答 问题1:什么是page cache?page cache的工作原理是什么?
+答案:Page cache是内核管理的内存区域,用于缓存磁盘上的文件数据。程序通过read系统调用或者mmap将文件数据读取到page cache中。Page cache的工作原理是,文件I/O首先写入page cache,然后page cache再同步到磁盘。 问题2:举例说明page cache的工作原理?
+答案:例如进程读取了一个文件的前4KB数据,由于磁盘的最小I/O单位为4KB,内核实际会将0-4KB的数据加载到page cache中。内核可能会再将4-8KB、8-12KB的数据进行预读,缓存在page cache中。 问题3:page,page cache和被换出的page有什么区别?
+答案: page 是内存分配的基本单位,page cache由多个page构成。 page cache中的page对应磁盘上的文件数据,被称为文件归类(file-backed)页。 被换出的page则对应交换分区中的数据,称为匿名页(anonymous page)。 问题4:buffer cache 是什么?和page cache 有什么区别和关系?
+答案:Buffer cache用于缓存块设备(如磁盘)的数据块,page cache用于缓存文件的数据页。 如果一个文件的数据页装入了page cache,对应的磁盘块数据会指向这个页,buffer cache只需维护指针即可。 现在我们通常将buffer cache 和page cache统称为page cache。 问题5:预读是什么?和page cache 有什么关系?" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://rosouly.github.io/rosy.github.io/posts/%E9%98%85%E8%AF%BBprompt_%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-06-12T11:32:12+08:00" />
@@ -22,7 +26,11 @@
 第三段总结:
 前两段总结: 内核的page cache机制用于加速文件读写。 本段总结:文章介绍了page cache的工作原理。 第四段总结:
 前三段总结: 通过page cache内存缓存加速文件读写。 本段总结:通过example说明了如何查看系统的page cache。 第五段总结:
-前四段总结:通过例子了解page cache。 本段总结: 介绍了page、 page cache和被换出的page。 "/>
+前四段总结:通过例子了解page cache。 本段总结: 介绍了page、 page cache和被换出的page。 问答 问题1:什么是page cache?page cache的工作原理是什么?
+答案:Page cache是内核管理的内存区域,用于缓存磁盘上的文件数据。程序通过read系统调用或者mmap将文件数据读取到page cache中。Page cache的工作原理是,文件I/O首先写入page cache,然后page cache再同步到磁盘。 问题2:举例说明page cache的工作原理?
+答案:例如进程读取了一个文件的前4KB数据,由于磁盘的最小I/O单位为4KB,内核实际会将0-4KB的数据加载到page cache中。内核可能会再将4-8KB、8-12KB的数据进行预读,缓存在page cache中。 问题3:page,page cache和被换出的page有什么区别?
+答案: page 是内存分配的基本单位,page cache由多个page构成。 page cache中的page对应磁盘上的文件数据,被称为文件归类(file-backed)页。 被换出的page则对应交换分区中的数据,称为匿名页(anonymous page)。 问题4:buffer cache 是什么?和page cache 有什么区别和关系?
+答案:Buffer cache用于缓存块设备(如磁盘)的数据块,page cache用于缓存文件的数据页。 如果一个文件的数据页装入了page cache,对应的磁盘块数据会指向这个页,buffer cache只需维护指针即可。 现在我们通常将buffer cache 和page cache统称为page cache。 问题5:预读是什么?和page cache 有什么关系?"/>
 <meta name="application-name" content="My cool site">
 <meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -37,7 +45,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/rosouly.github.io\/rosy.github.io\/posts\/%E9%98%85%E8%AF%BBprompt_%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F\/"
-        },"genre": "posts","wordcount":  27 ,
+        },"genre": "posts","wordcount":  98 ,
         "url": "https:\/\/rosouly.github.io\/rosy.github.io\/posts\/%E9%98%85%E8%AF%BBprompt_%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F\/","datePublished": "2023-06-12T11:32:12+08:00","dateModified": "2023-06-12T11:32:12+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -79,7 +87,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">操作系统——文件系统</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/rosy.github.io/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-06-12">2023-06-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;27 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-06-12">2023-06-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;98 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -91,6 +99,7 @@
     <li><a href="#进程写文件时进程发生了崩溃已写入的数据会丢失吗">进程写文件时，进程发生了崩溃，已写入的数据会丢失吗？</a>
       <ul>
         <li><a href="#分段总结">分段总结</a></li>
+        <li><a href="#问答">问答</a></li>
       </ul>
     </li>
   </ul>
@@ -114,6 +123,40 @@
 <li>前四段总结:通过例子了解page cache。</li>
 <li>本段总结: 介绍了page、 page cache和被换出的page。</li>
 </ul>
+<h3 id="问答">问答</h3>
+<p>问题1:什么是page cache?page cache的工作原理是什么?</p>
+<pre><code>答案:Page cache是内核管理的内存区域,用于缓存磁盘上的文件数据。程序通过read系统调用或者mmap将文件数据读取到page cache中。Page cache的工作原理是,文件I/O首先写入page cache,然后page cache再同步到磁盘。
+</code></pre>
+<p>问题2:举例说明page cache的工作原理?</p>
+<pre><code>答案:例如进程读取了一个文件的前4KB数据,由于磁盘的最小I/O单位为4KB,内核实际会将0-4KB的数据加载到page cache中。内核可能会再将4-8KB、8-12KB的数据进行预读,缓存在page cache中。
+</code></pre>
+<p>问题3:page,page cache和被换出的page有什么区别?</p>
+<pre><code>答案:
+page 是内存分配的基本单位,page cache由多个page构成。
+page cache中的page对应磁盘上的文件数据,被称为文件归类(file-backed)页。
+被换出的page则对应交换分区中的数据,称为匿名页(anonymous page)。
+</code></pre>
+<p>问题4:buffer cache 是什么?和page cache 有什么区别和关系?</p>
+<pre><code>答案:Buffer cache用于缓存块设备(如磁盘)的数据块,page cache用于缓存文件的数据页。
+如果一个文件的数据页装入了page cache,对应的磁盘块数据会指向这个页,buffer cache只需维护指针即可。
+现在我们通常将buffer cache 和page cache统称为page cache。
+</code></pre>
+<p>问题5:预读是什么?和page cache 有什么关系?</p>
+<pre><code>答案:预读(readahead)是内核为了提高读数据效率主动加载相邻的数据到page cache中的技术。
+当进程读取了部分数据,内核就会预测接下来可能需要读取的数据,主动将这部分数据读入page cache,减少后续I/O。
+</code></pre>
+<p>问题6:介绍一下page cache 与文件持久化的一致性和可靠性?</p>
+<pre><code>答案:写入数据时,data first write to page cache,然后page cache同步到磁盘。这会造成内存和磁盘数据不一致。
+Linux提供两种策略:
+write through:应用程序主动调用fsync确保数据同步到磁盘,提供一致性。
+write back:内核定期将脏页(dirty page)回写到磁盘,提供一致性。
+fsync和fdatasync系统调用可以主动调用回写数据。
+</code></pre>
+<p>问题7:page cache的优劣势分别是什么?</p>
+<pre><code>答案:
+优势:加速数据访问、减少I/O次数、提高I/O吞吐量
+劣势:消耗物理内存、应用难以管理、某些场景比direct I/O多一次I/O
+</code></pre>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
