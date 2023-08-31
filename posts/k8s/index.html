@@ -39,7 +39,7 @@ kubectl apply -f service."/>
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/rosouly.github.io\/rosy.github.io\/posts\/k8s\/"
-        },"genre": "posts","wordcount":  149 ,
+        },"genre": "posts","wordcount":  421 ,
         "url": "https:\/\/rosouly.github.io\/rosy.github.io\/posts\/k8s\/","datePublished": "2023-08-31T07:36:53+08:00","dateModified": "2023-08-31T07:36:53+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -81,8 +81,8 @@ kubectl apply -f service."/>
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">K8s</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/rosy.github.io/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-08-31">2023-08-31</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;149 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-08-31">2023-08-31</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;421 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -101,7 +101,11 @@ kubectl apply -f service."/>
         <li><a href="#deployment">deployment</a></li>
       </ul>
     </li>
-    <li><a href="#任务三">任务三</a></li>
+    <li><a href="#任务三">任务三</a>
+      <ul>
+        <li><a href="#ingress">Ingress</a></li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h2 id="任务一">任务一</h2>
@@ -183,8 +187,121 @@ kubectl apply -f service."/>
 </span></span></code></pre></div><p>执行</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>kubectl apply -f deployment.yaml
 </span></span></code></pre></div><h2 id="任务三">任务三</h2>
-<p>成果：</p>
-<p>前言：本任务将会涉及到概念ingress</p>
+<p>成果：在浏览器访问 http://<!-- raw HTML omitted -->/hello 显示 [v3] Hello, Kubernetes!，访问 http://<!-- raw HTML omitted -->/ 显示 nginx 默认页面。</p>
+<p>前言：本次任务将涉及到一个新的概念，Ingress。Ingress 是 Kubernetes 提供的一种 HTTP/HTTPS 路由规则管理方法，可以用于在集群外部和内部服务之间提供路由。我们将通过 Ingress 为我们的应用创建一个访问入口。</p>
+<p>检验方法：</p>
+<ol>
+<li>试着用自己的话说出 Ingress 的作用和原理。</li>
+<li>比较 Service 和 Ingress，他们的作用和运用场景有何不同。</li>
+<li>访问 http://<!-- raw HTML omitted -->/hello 和 http://<!-- raw HTML omitted -->/，看是否得到预期结果。</li>
+</ol>
+<h3 id="ingress">Ingress</h3>
+<p>首先，我们需要删除之前创建的所有 pod，deployment 和 service 资源。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>kubectl delete deployment,service --all
+</span></span></code></pre></div><p>然后，创建 hellok8s:v3 和 nginx 的 deployment 与 service 资源。需要注意的是，这次我们将 Service 的 type 设置为 ClusterIP。</p>
+<p>hellok8s:v3 的端口映射为 3000:3000，nginx 的端口映射为 4000:80。这里的端口映射将在后续的 Ingress Route 规则中用到。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#75715e"># hellok8s.yaml</span>
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Service</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">service-hellok8s-clusterip</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">type</span>: <span style="color:#ae81ff">ClusterIP</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">selector</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">hellok8s</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">port</span>: <span style="color:#ae81ff">3000</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">targetPort</span>: <span style="color:#ae81ff">3000</span>
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">apps/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Deployment</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">hellok8s-deployment</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">replicas</span>: <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">selector</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">matchLabels</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">app</span>: <span style="color:#ae81ff">hellok8s</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">template</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">app</span>: <span style="color:#ae81ff">hellok8s</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">containers</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">image</span>: <span style="color:#ae81ff">guangzhengli/hellok8s:v3</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">name</span>: <span style="color:#ae81ff">hellok8s-container</span>
+</span></span></code></pre></div><p>创建 Nginx deployment 和 service：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#75715e"># nginx.yaml</span>
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Service</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">service-nginx-clusterip</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">type</span>: <span style="color:#ae81ff">ClusterIP</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">selector</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">nginx</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">port</span>: <span style="color:#ae81ff">4000</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">targetPort</span>: <span style="color:#ae81ff">80</span>
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">apps/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Deployment</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">nginx-deployment</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">replicas</span>: <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">selector</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">matchLabels</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">app</span>: <span style="color:#ae81ff">nginx</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">template</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">app</span>: <span style="color:#ae81ff">nginx</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">containers</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">image</span>: <span style="color:#ae81ff">nginx</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">name</span>: <span style="color:#ae81ff">nginx-container</span>
+</span></span></code></pre></div><p>应用这两个 yaml 文件：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>kubectl apply -f hellok8s.yaml
+</span></span><span style="display:flex;"><span>kubectl apply -f nginx.yaml
+</span></span></code></pre></div><p>检查 pods 和 service：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>kubectl get pods
+</span></span><span style="display:flex;"><span>kubectl get service
+</span></span></code></pre></div><p>现在，我们可以创建我们的 Ingress 资源。Ingress 资源定义了访问集群内部服务的 HTTP 和 HTTPS 路由规则。在我们的例子中，我们将前缀为 /hello 的路由规则重定向到 hellok8s:v3 服务，前缀为 / 的根路径重定向到 nginx。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#75715e"># ingress.yaml</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">networking.k8s.io/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Ingress</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">hello-ingress</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">annotations</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># We are defining this annotation to prevent nginx</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># from redirecting requests to `https` for now</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">nginx.ingress.kubernetes.io/ssl-redirect</span>: <span style="color:#e6db74">&#34;false&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">rules</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">http</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">paths</span>:
+</span></span><span style="display:flex;"><span>          - <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/hello</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">pathType</span>: <span style="color:#ae81ff">Prefix</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">backend</span>:
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">service</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">name</span>: <span style="color:#ae81ff">service-hellok8s-clusterip</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">port</span>:
+</span></span><span style="display:flex;"><span>                  <span style="color:#f92672">number</span>: <span style="color:#ae81ff">3000</span>
+</span></span><span style="display:flex;"><span>          - <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">pathType</span>: <span style="color:#ae81ff">Prefix</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">backend</span>:
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">service</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">name</span>: <span style="color:#ae81ff">service-nginx-clusterip</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">port</span>:
+</span></span><span style="display:flex;"><span>                  <span style="color:#f92672">number</span>: <span style="color:#ae81ff">4000</span>
+</span></span></code></pre></div><p>应用 ingress.yaml 文件：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>kubectl apply -f ingress.yaml
+</span></span></code></pre></div><p>检查 Ingress：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>kubectl get ingress
+</span></span></code></pre></div><p>现在，你可以通过 `curl http</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
