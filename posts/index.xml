@@ -10,12 +10,12 @@
     <author>Author</author>
     <guid>https://rosouly.github.io/rosy.github.io/posts/k8s/</guid>
     <description><![CDATA[任务一 成果：在浏览器分别访问 http://&lt;k8s节点1的ip&gt;/30000.com 和 http://&lt;k8s节点2的ip&gt;/30000.com 显示 [v1] Hello, Kubernetes!
-前言：本次将提供两个文件，涉及两个概念，一个是pod，一个是service。教程中将会提供两个yaml文件，达到成果后，想办法请搞清楚这两个文件每一行的的含义，并理清整个过程。
+前言：本次任务将涉及两个概念，一个是pod，一个是service。同时将会提供两个yaml文件，达到成果后，想办法请搞清楚这两个文件每一行的的含义，并理清整个过程。
 检验方法：
 试着用自己的话说出对pod和service的理解 继续任务二 先备条件/知识:
-搭建了两个节点以上的k8s集群 构建golang镜像推送到dockerhub中，详情见：https://k8s-tutorials.pages.dev/container.html pod # hellok8s.yaml apiVersion: v1 kind: Pod metadata: name: hellok8s labels: app: hellok8s spec: containers: - name: hellok8s-container image: rosylsq/hellok8s:v3 执行
+搭建了两个节点以上的k8s集群 构建golang镜像推送到dockerhub中，详情见：https://k8s-tutorials.pages.dev/container.html pod # hellok8s.yaml apiVersion: v1 kind: Pod metadata: name: hellok8s labels: app: hellok8s spec: containers: - name: hellok8s-container image: rosylsq/hellok8s:v3 # 镜像请改成你自己的镜像 执行
 kubectl apply -f hellok8s.yaml service # service.yaml apiVersion: v1 kind: Service metadata: name: service-hellok8s-nodeport spec: type: NodePort selector: app: hellok8s ports: - port: 3000 nodePort: 30000 targetPort: 3000 执行
-kubectl apply -f service.yaml ]]></description>
+kubectl apply -f service.]]></description>
 </item>
 <item>
     <title>操作系统——网络系统</title>
