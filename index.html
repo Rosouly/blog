@@ -63,7 +63,7 @@
     </h1><div class="post-meta"><span class="post-author"><a href="/rosy.github.io/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-09-03">2023-09-03</time></span></div><div class="content">详情见：Go Zero从入门到k8s部署 —— LowWay</div><div class="post-footer">
         <a href="/rosy.github.io/posts/go-zero%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0k8s%E9%83%A8%E7%BD%B2/">Read More</a></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/rosy.github.io/posts/k8s/">K8s</a>
+        <a href="/rosy.github.io/posts/k8s%E5%85%A5%E9%97%A8/">K8s入门</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/rosy.github.io/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-08-31">2023-08-31</time></span></div><div class="content">任务一 成果：在浏览器分别访问 http://&lt;k8s节点1的ip&gt;/30000.com 和 http://&lt;k8s节点2的ip&gt;/30000.com 显示 [v1] Hello, Kubernetes!
 前言：本次任务将涉及两个概念，一个是pod，一个是service。同时将会提供两个yaml文件，达到成果后，想办法请搞清楚这两个文件每一行的的含义，并理清整个过程。
 检验方法：
@@ -71,7 +71,7 @@
 搭建了两个节点以上的k8s集群 构建golang镜像推送到dockerhub中，详情见：https://k8s-tutorials.pages.dev/container.html pod # hellok8s.yaml apiVersion: v1 kind: Pod metadata: name: hellok8s labels: app: hellok8s spec: containers: - name: hellok8s-container image: rosylsq/hellok8s:v3 # 镜像请改成你自己的镜像 执行
 kubectl apply -f hellok8s.yaml service # service.yaml apiVersion: v1 kind: Service metadata: name: service-hellok8s-nodeport spec: type: NodePort selector: app: hellok8s ports: - port: 3000 nodePort: 30000 targetPort: 3000 执行
 kubectl apply -f service.</div><div class="post-footer">
-        <a href="/rosy.github.io/posts/k8s/">Read More</a></div>
+        <a href="/rosy.github.io/posts/k8s%E5%85%A5%E9%97%A8/">Read More</a></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/rosy.github.io/posts/%E9%98%85%E8%AF%BBprompt_%E7%BD%91%E7%BB%9C%E7%B3%BB%E7%BB%9F/">操作系统——网络系统</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/rosy.github.io/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-06-12">2023-06-12</time></span></div><div class="content">优化文件传输的方式 分段总结 第一段总结:简单介绍什么是零拷贝

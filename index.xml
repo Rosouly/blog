@@ -22,11 +22,11 @@
     <description><![CDATA[详情见：Go Zero从入门到k8s部署 —— LowWay]]></description>
 </item>
 <item>
-    <title>K8s</title>
-    <link>https://rosouly.github.io/rosy.github.io/posts/k8s/</link>
+    <title>K8s入门</title>
+    <link>https://rosouly.github.io/rosy.github.io/posts/k8s%E5%85%A5%E9%97%A8/</link>
     <pubDate>Thu, 31 Aug 2023 07:36:53 &#43;0800</pubDate>
     <author>Author</author>
-    <guid>https://rosouly.github.io/rosy.github.io/posts/k8s/</guid>
+    <guid>https://rosouly.github.io/rosy.github.io/posts/k8s%E5%85%A5%E9%97%A8/</guid>
     <description><![CDATA[任务一 成果：在浏览器分别访问 http://&lt;k8s节点1的ip&gt;/30000.com 和 http://&lt;k8s节点2的ip&gt;/30000.com 显示 [v1] Hello, Kubernetes!
 前言：本次任务将涉及两个概念，一个是pod，一个是service。同时将会提供两个yaml文件，达到成果后，想办法请搞清楚这两个文件每一行的的含义，并理清整个过程。
 检验方法：
